@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <PreferenceCategory
+        android:title="@string/title_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Preference
+            android:title="@string/content_username"
+            android:summary="Username"
+            android:key="username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditTextPreference
+            android:title="@string/content_mail"
+            android:summary="Something@gmail.com"
+            android:key="email"
+            android:defaultValue=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/title_notifications"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <SwitchPreference
+            android:title="@string/content_push_notifications"
+            android:summary="@string/content_push_notification_summary_activated"
+            android:key="push_notification"
+            android:defaultValue="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <SwitchPreference
+            android:title="@string/content_notifications_email"
+            android:summary="@string/not_implemented"
+            android:key="email_notification"
+            android:defaultValue="false"
+            android:selectable="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/title_speed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditTextPreference
+            android:key="lowest_speed"
+            android:title="@string/content_minimal_speed"
+            android:summary="@string/content_minimal_speed_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:defaultValue="5"/>
+
+        <EditTextPreference
+            android:key="highest_speed"
+            android:title="@string/content_maximal_speed"
+            android:summary="@string/content_maximal_speed_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:defaultValue="80"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

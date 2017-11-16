@@ -1,7 +1,10 @@
 package com.example.rosalie.cyclingtracker;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Point;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -9,120 +12,35 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Set;
 
-    private Toolbar toolbar; // This is the toolbar object that needs to be added to the activity
-
-    private String[] mPlanetTitles;
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private ActionBar actionBar;
+public class MainActivity extends NavDrawActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        mPlanetTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        //inflate your activity layout here!
+        View contentView = inflater.inflate(R.layout.activity_main, null, false);
+        drawer.addView(contentView, 0);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        actionBar=getSupportActionBar();
-
-        // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mPlanetTitles));
-        // Set the list's click listener
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
-        mDrawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                mDrawerLayout,         /* DrawerLayout object */
-                toolbar,  /* nav drawer icon to replace 'Up' caret */
-                R.string.navigation_drawer_open,  /* "open drawer" description */
-                R.string.navigation_drawer_close  /* "close drawer" description */
-        ) {
-
-            /** Called when a drawer has settled in a completely closed state. */
-             public void onDrawerClosed(View view) {
-            }
-
-            /** Called when a drawer has settled in a completely open state. */
-            public void onDrawerOpened(View drawerView) {
-
-            }
-        };
-
-        // Set the drawer toggle as the DrawerListener
-        mDrawerLayout.addDrawerListener(mDrawerToggle);
-
-        //getSupportActionBar().hide();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_base, menu);
-        return true;
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Pass the event to ActionBarDrawerToggle, if it returns
-        // true, then it has handled the app icon touch event
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        // Handle your other action bar items...
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * Swaps fragments in the main content view
-     */
-    private void selectItem(int position) {
-        Toast.makeText(this, R.string.app_name, Toast.LENGTH_SHORT).show();
-
-        // Highlight the selected item, update the title, and close the drawer
-        mDrawerList.setItemChecked(position, true);
-        setTitle(mPlanetTitles[position]);
-        mDrawerLayout.closeDrawer(mDrawerList);
-    }
-
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView parent, View view, int position, long id) {
-            selectItem(position);
-        }
+        toolbar.setTitle(R.string.app_name);
     }
 }
 

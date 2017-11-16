@@ -10,15 +10,21 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".WhatsUp" />
         <activity android:name=".Profile" />
         <activity android:name=".Settings" />
         <activity android:name=".About" />
-        <activity android:name=".MapActivity">
+        <activity android:name=".MapActivity"></activity>
+        <activity
+            android:name=".NavDrawActivity"
+            android:label="@string/title_activity_nav_draw"
+            android:theme="@style/AppTheme">
+
         </activity>
     </application>
 
