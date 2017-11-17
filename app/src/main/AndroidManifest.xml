@@ -25,7 +25,11 @@
         <activity android:name=".Profile" />
         <activity android:name=".Settings" />
         <activity android:name=".About" />
-        <activity android:name=".MapActivity">
+        <activity android:name=".MapActivity"/>
+        <activity
+            android:name=".NavDrawActivity"
+            android:label="@string/title_activity_nav_draw"
+            android:theme="@style/AppTheme">
 
         </activity>
         <activity android:name=".DatabaseRequests"></activity>

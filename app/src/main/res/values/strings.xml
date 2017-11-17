@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CyclingTracker</string>
+    <string name="app_name">Cycling Tracker</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -8,10 +8,13 @@
     <string name="closeDrawer">close_drawer</string>
 
     <!-- Navigation Drawer menu labels -->
-    <string name="nav_whats_up">Whatsup</string>
+    <string name="nav_whats_up">What\'s up</string>
     <string name="nav_profile">Profile</string>
     <string name="nav_settings">Settings</string>
-    <string name="nav_about_us">About Us</string>
+    <string name="nav_about_us">About us</string>
+    <string name="nav_map">Map</string>
+
+    <string name="catchphrase">Your best cycling friend</string>
 
     <!-- Toolbar titles when navigation menu item is selected -->
     <string-array name="nav_item_activity_titles">
@@ -37,7 +40,25 @@
     <string name="title_activity_menu">MenuActivity</string>
 
     <string name="action_settings">Settings</string>
-    <string name="title_activity_maps23">Map</string>
+    <string name="title_activity_nav_draw">NavDrawActivity</string>
 
+    <!-- Strings for the settings page -->
+    <string name="title_account">My Account</string>
+    <string name="content_username">Username</string>
+    <string name="content_mail">Email</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="content_push_notifications">Push notifications</string>
+    <string name="content_push_notification_summary_activated">You will receive push notifications</string>
+    <string name="content_push_notification_summary_deactivated">You will not receive push notification</string>
+    <string name="content_notifications_email">Email notifications</string>
+    <string name="not_implemented">Currently not implemented</string>
+    <string name="title_speed">Speed parameters</string>
+    <string name="content_minimal_speed">Minimal speed (km)</string>
+    <string name="content_minimal_speed_summary">Lowest speed to be recorded</string>
+    <string name="content_maximal_speed">Maximal speed (km)</string>
+    <string name="content_maximal_speed_summary">Highest speed to be recorded</string>
 
+    <!-- Strings for the sign in/up fragments -->
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
 </resources>
