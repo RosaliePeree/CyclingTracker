@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "671340858204",
+    "firebase_url": "https://cyclingtracker-13a91.firebaseio.com",
+    "project_id": "cyclingtracker-13a91",
+    "storage_bucket": "cyclingtracker-13a91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671340858204:android:16b03bc833f73933",
+        "android_client_info": {
+          "package_name": "com.example.rosalie.cyclingtracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "671340858204-vvlc6lmbhrqclh323h57j4o0hg53s1e8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rosalie.cyclingtracker",
+            "certificate_hash": "6e97319645b8121be2fed401c254e9eea55e19e3"
+          }
+        },
+        {
+          "client_id": "671340858204-gl9ml8jcj4nk03ldb3niafq4787o888h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8RBRDPtlPzJwrYhVxS_UB7bo_6hfihUc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "671340858204-gl9ml8jcj4nk03ldb3niafq4787o888h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
