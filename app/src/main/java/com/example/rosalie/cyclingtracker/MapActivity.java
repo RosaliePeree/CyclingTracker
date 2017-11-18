@@ -2,10 +2,11 @@
 package com.example.rosalie.cyclingtracker;
 
 /**
- * Created by Filip_PC on 16-11-2017, and proud of it.
+ * Created by Filip_PC on 16-11-2017
  */
 
-
+import com.example.rosalie.cyclingtracker.Map.CLocation;
+import com.example.rosalie.cyclingtracker.Map.IBaseGpsListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.Polyline;

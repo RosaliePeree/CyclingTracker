@@ -1,5 +1,9 @@
 package com.example.rosalie.cyclingtracker;
 
+/**
+ * Created by Rose on 07-11-2017.
+ */
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -26,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fragmentMain = (LinearLayout) findViewById(R.id.layout_fragment_main);
         fragmentSignIn = (LinearLayout) findViewById(R.id.layout_fragment_sign_in);
         fragmentSignUp = (LinearLayout) findViewById(R.id.layout_fragment_sign_up);
-        //Set up the visibilty to only display the main layout, aka the two first buttons to sign in and sign out
+        //Set up the visibility to only display the main layout, aka the two first buttons to sign in and sign out
         fragmentMain.setVisibility(View.VISIBLE);
         fragmentSignUp.setVisibility(View.GONE);
         fragmentSignIn.setVisibility(View.GONE);
@@ -57,13 +61,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.submit_button_sign_in:
                 Toast.makeText(this, "Check the info in the database", Toast.LENGTH_SHORT).show();
                 /* Insert database code here (Greg) */
-                Intent intent = new Intent(this, WhatsUp.class);
+                Intent intent = new Intent(this, WhatsUpActivity.class);
                 startActivity(intent);
                 break;
             case R.id.submit_button_sign_on:
                 Toast.makeText(this,"Add the info in the database",Toast.LENGTH_SHORT).show();
                 /* Insert database code here (Greg) */
-                Intent intents = new Intent(this, About.class);
+                Intent intents = new Intent(this, AboutActivity.class);
                 startActivity(intents);
                 break;
         }

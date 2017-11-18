@@ -1,13 +1,15 @@
 package com.example.rosalie.cyclingtracker;
 
+/**
+ * Created by Rose on 07-11-2017.
+ */
+
 import android.content.Context;
-import android.content.pm.ActivityInfo;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
-public class Profile extends NavDrawActivity {
+public class ProfileActivity extends NavDrawActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_marginTop="?attr/actionBarSize"
-    tools:context="com.example.rosalie.cyclingtracker.Settings">
+    tools:context="com.example.rosalie.cyclingtracker.SettingsActivity">
 
     <fragment
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fragment_settings"
-        android:name="com.example.rosalie.cyclingtracker.Settings$SettingsFragment"/>
+        android:name="com.example.rosalie.cyclingtracker.SettingsActivity$SettingsFragment"/>
 </LinearLayout>

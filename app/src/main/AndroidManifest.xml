@@ -21,10 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WhatsUp" />
-        <activity android:name=".Profile" />
-        <activity android:name=".Settings" />
-        <activity android:name=".About" />
+        <activity android:name=".WhatsUpActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".AboutActivity" />
         <activity android:name=".MapActivity"/>
         <activity
             android:name=".NavDrawActivity"
@@ -32,7 +32,7 @@
             android:theme="@style/AppTheme">
 
         </activity>
-        <activity android:name=".DatabaseRequests"></activity>
+        <activity android:name=".Database.DatabaseRequests"></activity>
     </application>
 
 </manifest>

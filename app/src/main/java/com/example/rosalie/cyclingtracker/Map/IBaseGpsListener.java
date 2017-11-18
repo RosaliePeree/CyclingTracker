@@ -1,4 +1,4 @@
-package com.example.rosalie.cyclingtracker;
+package com.example.rosalie.cyclingtracker.Map;
 
 /**
  * Created by Filip_PC on 16-11-2017.
