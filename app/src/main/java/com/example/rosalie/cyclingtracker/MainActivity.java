@@ -1,46 +1,98 @@
 package com.example.rosalie.cyclingtracker;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
-import android.graphics.Point;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Display;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
+import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import java.util.Set;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-public class MainActivity extends NavDrawActivity {
+    Button buttonSignIn, buttonSignUp, buttonSubmitSignIn, buttonSubmitSignOn;
+    LinearLayout fragmentMain, fragmentSignIn, fragmentSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        setContentView(R.layout.activity_main);
+        setButtonsListener();
+    }
 
-        //inflate your activity layout here!
-        View contentView = inflater.inflate(R.layout.activity_main, null, false);
-        drawer.addView(contentView, 0);
+    public void setButtonsListener(){
+        fragmentMain = (LinearLayout) findViewById(R.id.layout_fragment_main);
+        fragmentSignIn = (LinearLayout) findViewById(R.id.layout_fragment_sign_in);
+        fragmentSignUp = (LinearLayout) findViewById(R.id.layout_fragment_sign_up);
+        //Set up the visibilty to only display the main layout, aka the two first buttons to sign in and sign out
+        fragmentMain.setVisibility(View.VISIBLE);
+        fragmentSignUp.setVisibility(View.GONE);
+        fragmentSignIn.setVisibility(View.GONE);
 
-        toolbar.setTitle(R.string.app_name);
+        //Find all the buttons on the layout and add listeners to them
+        buttonSignIn = (Button)findViewById(R.id.button_sign_in);
+        buttonSignUp = (Button)findViewById(R.id.button_sign_up);
+        buttonSubmitSignIn = (Button)findViewById(R.id.submit_button_sign_in);
+        buttonSubmitSignOn = (Button)findViewById(R.id.submit_button_sign_on);
+        buttonSignIn.setOnClickListener(this);
+        buttonSignUp.setOnClickListener(this);
+        buttonSubmitSignIn.setOnClickListener(this);
+        buttonSubmitSignOn.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()) {
+            case R.id.button_sign_in:
+                //Hide the previous buttons and display the new buttons
+                fragmentMain.setVisibility(View.GONE);
+                fragmentSignIn.setVisibility(View.VISIBLE);
+                break;
+            case R.id.button_sign_up:
+                fragmentMain.setVisibility(View.GONE);
+                fragmentSignUp.setVisibility(View.VISIBLE);
+                break;
+            case R.id.submit_button_sign_in:
+                Toast.makeText(this, "Check the info in the database", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, WhatsUp.class);
+                startActivity(intent);
+                break;
+            case R.id.submit_button_sign_on:
+                Toast.makeText(this,"Add the info in the database",Toast.LENGTH_SHORT).show();
+                Intent intents = new Intent(this, About.class);
+                startActivity(intents);
+                break;
+        }
+    }
+
+    /* Those two functions are used to handle the back key press event, to not have it go out of the activity */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        if (Integer.parseInt(android.os.Build.VERSION.SDK) > 5
+                && keyCode == KeyEvent.KEYCODE_BACK
+                && event.getRepeatCount() == 0) {
+            Log.d("CDA", "onKeyDown Called");
+            onBackPressed();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Log.d("CDA", "onBackPressed Called");
+        fragmentSignIn.setVisibility(View.GONE);
+        fragmentSignUp.setVisibility(View.GONE);
+        fragmentMain.setVisibility(View.VISIBLE);
     }
 }
+
+
+
 

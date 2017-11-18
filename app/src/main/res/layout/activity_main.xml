@@ -1,5 +1,158 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_weight="2">
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:id="@+id/layout_fragment_main">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_sign_in"
+            android:gravity="center"
+            android:text="@string/sign_in"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimaryText"
+            android:background="@drawable/full_blue_button"
+            android:textSize="50sp"
+            android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_sign_up"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="@string/sign_up"
+            android:textColor="@color/colorPrimaryText"
+            android:background="@drawable/full_blue_button"
+            android:textSize="50sp"
+            android:layout_margin="@dimen/activity_horizontal_margin"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:id="@+id/layout_fragment_sign_in">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/name"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="35sp"
+            android:id="@+id/text_view_username"
+            android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryText"
+            android:background="@drawable/sign_button"
+            android:textSize="35sp"
+            android:maxLines="1"
+            android:inputType="text"
+            android:id="@+id/edit_text_username"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:padding="@dimen/activity_horizontal_margin"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/password"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="35sp"
+            android:id="@+id/text_view_password"
+            android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryText"
+            android:background="@drawable/sign_button"
+            android:textSize="35sp"
+            android:maxLines="1"
+            android:inputType="textPassword"
+            android:id="@+id/edit_text_passwd"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:padding="@dimen/activity_horizontal_margin"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/submit_button_sign_in"
+            android:text="@string/submit"
+            android:textColor="@color/colorPrimaryText"
+            android:background="@drawable/full_blue_button"
+            android:textSize="35sp"
+            android:layout_margin="@dimen/activity_horizontal_margin"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:id="@+id/layout_fragment_sign_up">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create username"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="35sp"
+            android:id="@+id/text_create_username"
+            android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryText"
+            android:background="@drawable/sign_button"
+            android:textSize="35sp"
+            android:maxLines="1"
+            android:inputType="text"
+            android:id="@+id/edit_text_create_username"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:padding="@dimen/activity_horizontal_margin"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create password"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="35sp"
+            android:id="@+id/text_create_password"
+            android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryText"
+            android:background="@drawable/sign_button"
+            android:textSize="35sp"
+            android:maxLines="1"
+            android:inputType="textPassword"
+            android:id="@+id/edit_text_create_passwd"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:padding="@dimen/activity_horizontal_margin"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/submit_button_sign_on"
+            android:text="@string/submit"
+            android:textColor="@color/colorPrimaryText"
+            android:background="@drawable/full_blue_button"
+            android:textSize="35sp"
+            android:layout_margin="@dimen/activity_horizontal_margin"/>
+    </LinearLayout>
+</RelativeLayout>
