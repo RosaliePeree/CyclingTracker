@@ -1,5 +1,9 @@
 package com.example.rosalie.cyclingtracker;
 
+/**
+ * Created by Rose on 07-11-2017.
+ */
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -26,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fragmentMain = (LinearLayout) findViewById(R.id.layout_fragment_main);
         fragmentSignIn = (LinearLayout) findViewById(R.id.layout_fragment_sign_in);
         fragmentSignUp = (LinearLayout) findViewById(R.id.layout_fragment_sign_up);
-        //Set up the visibilty to only display the main layout, aka the two first buttons to sign in and sign out
+        //Set up the visibility to only display the main layout, aka the two first buttons to sign in and sign out
         fragmentMain.setVisibility(View.VISIBLE);
         fragmentSignUp.setVisibility(View.GONE);
         fragmentSignIn.setVisibility(View.GONE);
