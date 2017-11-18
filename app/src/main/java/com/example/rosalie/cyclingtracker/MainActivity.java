@@ -1,14 +1,10 @@
 package com.example.rosalie.cyclingtracker;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -60,11 +56,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.submit_button_sign_in:
                 Toast.makeText(this, "Check the info in the database", Toast.LENGTH_SHORT).show();
+                /* Insert database code here (Greg) */
                 Intent intent = new Intent(this, WhatsUp.class);
                 startActivity(intent);
                 break;
             case R.id.submit_button_sign_on:
                 Toast.makeText(this,"Add the info in the database",Toast.LENGTH_SHORT).show();
+                /* Insert database code here (Greg) */
                 Intent intents = new Intent(this, About.class);
                 startActivity(intents);
                 break;

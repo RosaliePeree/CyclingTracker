@@ -127,6 +127,27 @@
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Enter your email"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="35sp"
+            android:id="@+id/text_create_email"
+            android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryText"
+            android:background="@drawable/sign_button"
+            android:textSize="35sp"
+            android:maxLines="1"
+            android:inputType="text"
+            android:id="@+id/edit_text_create_email"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:padding="@dimen/activity_horizontal_margin"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Create password"
             android:textColor="@color/colorPrimaryText"
             android:textSize="35sp"

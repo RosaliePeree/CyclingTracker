@@ -30,10 +30,7 @@ public class DatabaseRequests extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference myRef;
 
-    public TextView yolo;
-    public TextView yolo2;
-    public EditText email_text;
-    public EditText pswd_text;
+    public EditText email_text_sign_in, email_text_sign_up, passwd_text_sign_in, passwd_text_sign_up;
 
     private User connectedUser;
     private ArrayList<Ride> allRides;
@@ -44,7 +41,7 @@ public class DatabaseRequests extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-            setContentView(R.layout.activity_main);
+            //setContentView(R.layout.activity_main);
 
             FirebaseDatabase database = FirebaseDatabase.getInstance(); //Connection to the database
             // //= database.getReference("message");
@@ -52,13 +49,12 @@ public class DatabaseRequests extends AppCompatActivity {
 
             mAuth = FirebaseAuth.getInstance();
 
-            pswd_text = (EditText) findViewById(R.id.password); //Inputs for pswd and email
-            email_text = (EditText) findViewById(R.id.email);
-            yolo = (TextView) findViewById(R.id.yolo); //Textviews for tests
-            yolo2 = (TextView) findViewById(R.id.yolo2);
+            passwd_text_sign_up = (EditText) findViewById(R.id.edit_text_create_passwd); //Inputs for pswd and email
+            passwd_text_sign_in = (EditText) findViewById(R.id.edit_text_passwd);
+            email_text_sign_up = (EditText) findViewById(R.id.edit_text_create_username);
+            email_text_sign_in = (EditText) findViewById(R.id.edit_text_username);
 
             allRides = new ArrayList<Ride>();
-
 
             //myRef.setValue("Hello, World!");
 
@@ -110,19 +106,12 @@ public class DatabaseRequests extends AppCompatActivity {
             super.onStart();
             // Check if user is signed in (non-null) and update UI accordingly.
             FirebaseUser currentUser = mAuth.getCurrentUser();
-            updateUI(currentUser);
         }
-
-    private void updateUI(FirebaseUser currentUser) {
-
-        yolo.setText(currentUser.getUid());
-        yolo2.setText(connectedUser.getName());
-    }
 
     public void signIn(View view){ //To connect as a user
 
-        String email = email_text.getText().toString();
-        String password = pswd_text.getText().toString();
+        String email = email_text_sign_in.getText().toString();
+        String password = passwd_text_sign_in.getText().toString();
 
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(DatabaseRequests.this, "Empty field.", Toast.LENGTH_SHORT).show();
@@ -137,8 +126,6 @@ public class DatabaseRequests extends AppCompatActivity {
                                 Log.d(TAG, "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Toast.makeText(DatabaseRequests.this, "Authentication Successful.", Toast.LENGTH_SHORT).show();
-                                updateUI(user);
-
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
