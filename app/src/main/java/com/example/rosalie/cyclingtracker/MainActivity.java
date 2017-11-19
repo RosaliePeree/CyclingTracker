@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.rosalie.cyclingtracker.Database.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         FirebaseUser user = mAuth.getCurrentUser();
                                         Toast.makeText(MainActivity.this, "Authentication Successful.", Toast.LENGTH_SHORT).show();
 
-                                        Intent intent = new Intent(MainActivity.this, WhatsUp.class);
+                                        Intent intent = new Intent(MainActivity.this, WhatsUpActivity.class);
                                         startActivity(intent);
 
 
@@ -144,13 +145,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         Log.d(TAG, "createUserWithEmail:success");
                                         FirebaseUser user = mAuth.getCurrentUser();
                                         List<String> sas = new ArrayList<String>();
-                                        User newUser = new User( emailSignUp.getText().toString(), usernameSignUp.getText().toString() , sas );
+                                        User newUser = new User(emailSignUp.getText().toString(), usernameSignUp.getText().toString(), sas);
                                         myRef.child("users").child(user.getUid()).setValue(newUser);
 
                                         Toast.makeText(MainActivity.this, "Creation of account successful.",
                                                 Toast.LENGTH_SHORT).show();
 
-                                        Intent intents = new Intent(MainActivity.this, About.class);
+                                        Intent intents = new Intent(MainActivity.this, AboutActivity.class);
                                         startActivity(intents);
 
                                     } else {

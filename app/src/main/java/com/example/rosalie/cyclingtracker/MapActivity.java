@@ -9,11 +9,14 @@ import com.example.rosalie.cyclingtracker.Map.CLocation;
 import com.example.rosalie.cyclingtracker.Map.IBaseGpsListener;
 
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import android.content.Context;
+import android.Manifest;
 import android.graphics.Color;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -23,6 +26,7 @@ import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -43,6 +47,7 @@ import java.util.Locale;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener, IBaseGpsListener {
 
+    private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 0;
     private GoogleMap mMap;
 
     //stuff for drawing the line
@@ -92,7 +97,29 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         setContentView(R.layout.activity_map);
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(mLocationRequest);
+
+        builder.setAlwaysShow(true);
+
+       /* if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }*/
+
+
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
             return;
         }
 
@@ -202,7 +229,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
             nCurrentSpeed = location.getSpeed();
             if (lowestSpeed > nCurrentSpeed) lowestSpeed = nCurrentSpeed;
             else if (highestSpeed < nCurrentSpeed) highestSpeed = nCurrentSpeed;
-
         }
 
 
@@ -239,14 +265,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     public void onStart() {
         super.onStart();
         Log.d(TAG, "onStart fired ..............");
-
     }
 
     @Override
     public void onStop() {
         super.onStop();
         Log.d(TAG, "onStop fired ..............");
-
     }
 
 
@@ -254,7 +278,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     public void onLocationChanged(Location location) {
         Log.d(TAG, "Firing onLocationChanged....");
         CLocation myLocation = new CLocation(location);
-        if (mStarted == true) {
+        if (mStarted) {
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
 
@@ -263,13 +287,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
             points.add(latLng);
             addMarker();
             redrawLine();
-
         }
-
-
         mCurrentLocation = location;
-
-
     }
 
     private void redrawLine() {
@@ -299,8 +318,18 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-
+       if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
             return;
         }
         googleMap.setMyLocationEnabled(true);
@@ -342,7 +371,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
         int meterConversion = 1609;
 
-        return new Double(distance * meterConversion).doubleValue();
+        return Double.valueOf(distance * meterConversion).doubleValue();
     }
 /*
     private void requestLocation()
