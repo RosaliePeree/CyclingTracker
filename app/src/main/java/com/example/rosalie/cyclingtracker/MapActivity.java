@@ -7,6 +7,7 @@ package com.example.rosalie.cyclingtracker;
 
 import com.example.rosalie.cyclingtracker.Map.CLocation;
 import com.example.rosalie.cyclingtracker.Map.IBaseGpsListener;
+
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.Polyline;

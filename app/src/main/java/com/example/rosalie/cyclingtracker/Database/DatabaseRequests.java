@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class DatabaseRequests extends AppCompatActivity {
 
@@ -144,5 +145,12 @@ public class DatabaseRequests extends AppCompatActivity {
         Ride newRide = new Ride( average_speed,  date,  distance,  id,  time);
 
         myRef.child("rides").child("ride"+id).setValue(newRide);
+    }
+
+    private void writeNewUser(String mail, String name, List<String> ride, String userID){ //Creates a new ride
+
+        User newUser = new User( mail,  name,  ride);
+
+        myRef.child("users").child(userID).setValue(newUser);
     }
 }

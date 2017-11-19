@@ -6,24 +6,55 @@ package com.example.rosalie.cyclingtracker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button buttonSignIn, buttonSignUp, buttonSubmitSignIn, buttonSubmitSignOn;
+    EditText emailSignIn, pswdSignIn, pswdSignUp, usernameSignUp, emailSignUp;
     LinearLayout fragmentMain, fragmentSignIn, fragmentSignUp;
+    private FirebaseAuth mAuth;
+    private DatabaseReference myRef;
+
+
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setButtonsListener();
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance(); //Connection to the database
+        mAuth = FirebaseAuth.getInstance();
+        myRef = database.getReference();
+
+        emailSignIn = (EditText) findViewById(R.id.edit_text_username);
+        pswdSignIn = (EditText) findViewById(R.id.edit_text_passwd);
+        pswdSignUp =  (EditText) findViewById(R.id.edit_text_create_passwd);
+        emailSignUp = (EditText) findViewById(R.id.edit_text_create_email);
+        usernameSignUp = (EditText) findViewById(R.id.edit_text_create_username);
+
     }
 
     public void setButtonsListener(){
@@ -59,16 +90,83 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 fragmentSignUp.setVisibility(View.VISIBLE);
                 break;
             case R.id.submit_button_sign_in:
+
                 Toast.makeText(this, "Check the info in the database", Toast.LENGTH_SHORT).show();
                 /* Insert database code here (Greg) */
                 Intent intent = new Intent(this, WhatsUpActivity.class);
                 startActivity(intent);
+                if (pswdSignIn.getText().toString().isEmpty() || emailSignIn.getText().toString().isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Empty field(s).", Toast.LENGTH_SHORT).show();
+                }else {
+
+                    mAuth.signInWithEmailAndPassword(emailSignIn.getText().toString(), pswdSignIn.getText().toString())
+                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d(TAG, "signInWithEmail:success");
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        Toast.makeText(MainActivity.this, "Authentication Successful.", Toast.LENGTH_SHORT).show();
+
+                                        Intent intent = new Intent(MainActivity.this, WhatsUp.class);
+                                        startActivity(intent);
+
+
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                        Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+
+
+                                    }
+
+                                }
+                            });
+                }
+
                 break;
             case R.id.submit_button_sign_on:
                 Toast.makeText(this,"Add the info in the database",Toast.LENGTH_SHORT).show();
                 /* Insert database code here (Greg) */
                 Intent intents = new Intent(this, AboutActivity.class);
                 startActivity(intents);
+                if (pswdSignUp.getText().toString().isEmpty() || emailSignUp.getText().toString().isEmpty() || usernameSignUp.getText().toString().isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Empty field(s).", Toast.LENGTH_SHORT).show();
+                }else {
+
+                    mAuth.createUserWithEmailAndPassword(emailSignUp.getText().toString(), pswdSignUp.getText().toString())
+                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d(TAG, "createUserWithEmail:success");
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        List<String> sas = new ArrayList<String>();
+                                        User newUser = new User( emailSignUp.getText().toString(), usernameSignUp.getText().toString() , sas );
+                                        myRef.child("users").child(user.getUid()).setValue(newUser);
+
+                                        Toast.makeText(MainActivity.this, "Creation of account successful.",
+                                                Toast.LENGTH_SHORT).show();
+
+                                        Intent intents = new Intent(MainActivity.this, About.class);
+                                        startActivity(intents);
+
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        FirebaseAuthException e = (FirebaseAuthException )task.getException();
+                                        Toast.makeText(MainActivity.this, "Failed Registration: "+e.getMessage(), Toast.LENGTH_LONG).show();
+                                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                        Log.e("LoginActivity", "Failed Registration", e);
+                                        Toast.makeText(MainActivity.this, "Creation of account failed.",
+                                                Toast.LENGTH_SHORT).show();
+
+                                    }
+
+                                }
+                            });
+                }
                 break;
         }
     }
