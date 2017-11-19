@@ -1,5 +1,7 @@
 package com.example.rosalie.cyclingtracker;
 
+import java.util.List;
+
 /**
  * Created by infer on 16/11/2017.
  */
@@ -7,12 +9,12 @@ package com.example.rosalie.cyclingtracker;
 public class User {
     private String mail;
     private String name;
-    private String[] ride;
+    private List<String> ride;
 
     public User() {
     }
 
-    public User(String mail, String name, String[] ride) {
+    public User(String mail, String name, List<String> ride) {
         this.mail = mail;
         this.name = name;
         this.ride = ride;
@@ -26,7 +28,7 @@ public class User {
         return name;
     }
 
-    public String[] getRide() {
+    public List<String> getRide() {
         return ride;
     }
 
@@ -38,7 +40,7 @@ public class User {
         this.name = name;
     }
 
-    public void setRide(String[] ride) {
+    public void setRide(List<String> ride) {
         this.ride = ride;
     }
 }
