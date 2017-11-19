@@ -14,7 +14,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"  android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,9 +30,8 @@
             android:name=".NavDrawActivity"
             android:label="@string/title_activity_nav_draw"
             android:theme="@style/AppTheme">
-
         </activity>
-        <activity android:name=".Database.DatabaseRequests"></activity>
+        <activity android:name=".Database.DatabaseRequests"/>
     </application>
 
 </manifest>

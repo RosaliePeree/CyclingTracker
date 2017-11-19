@@ -61,8 +61,11 @@
     <!-- Strings for the sign in/up fragments -->
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign up</string>
-    <string name="name">Username</string>
+    <string name="email">Email address</string>
     <string name="password">Password</string>
-    <string name="error_connection">Your username or password is not correct</string>
+    <string name="create_username">Create Username </string>
+    <string name="enter_email">Enter yout email address</string>
+    <string name="create_passwd">Create a password</string>
+    <string name="error_connection">Your email address or password is not correct</string>
     <string name="submit">Submit</string>
 </resources>

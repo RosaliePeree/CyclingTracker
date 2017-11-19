@@ -86,16 +86,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 fragmentMain.setVisibility(View.GONE);
                 fragmentSignIn.setVisibility(View.VISIBLE);
                 break;
+
             case R.id.button_sign_up:
                 fragmentMain.setVisibility(View.GONE);
                 fragmentSignUp.setVisibility(View.VISIBLE);
                 break;
-            case R.id.submit_button_sign_in:
 
+            case R.id.submit_button_sign_in:
                 Toast.makeText(this, "Check the info in the database", Toast.LENGTH_SHORT).show();
                 /* Insert database code here (Greg) */
-                Intent intent = new Intent(this, WhatsUpActivity.class);
-                startActivity(intent);
                 if (pswdSignIn.getText().toString().isEmpty() || emailSignIn.getText().toString().isEmpty()) {
                     Toast.makeText(MainActivity.this, "Empty field(s).", Toast.LENGTH_SHORT).show();
                 }else {
@@ -112,26 +111,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                         Intent intent = new Intent(MainActivity.this, WhatsUpActivity.class);
                                         startActivity(intent);
-
-
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Log.w(TAG, "signInWithEmail:failure", task.getException());
                                         Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-
-
                                     }
-
                                 }
                             });
                 }
-
                 break;
+
             case R.id.submit_button_sign_on:
                 Toast.makeText(this,"Add the info in the database",Toast.LENGTH_SHORT).show();
                 /* Insert database code here (Greg) */
-                Intent intents = new Intent(this, AboutActivity.class);
-                startActivity(intents);
                 if (pswdSignUp.getText().toString().isEmpty() || emailSignUp.getText().toString().isEmpty() || usernameSignUp.getText().toString().isEmpty()) {
                     Toast.makeText(MainActivity.this, "Empty field(s).", Toast.LENGTH_SHORT).show();
                 }else {
@@ -144,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "createUserWithEmail:success");
                                         FirebaseUser user = mAuth.getCurrentUser();
-                                        List<String> sas = new ArrayList<String>();
+                                        List<String> sas = new ArrayList<>();
                                         User newUser = new User(emailSignUp.getText().toString(), usernameSignUp.getText().toString(), sas);
                                         myRef.child("users").child(user.getUid()).setValue(newUser);
 
@@ -153,7 +145,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                         Intent intents = new Intent(MainActivity.this, AboutActivity.class);
                                         startActivity(intents);
-
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         FirebaseAuthException e = (FirebaseAuthException )task.getException();
@@ -164,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                 Toast.LENGTH_SHORT).show();
 
                                     }
-
                                 }
                             });
                 }
