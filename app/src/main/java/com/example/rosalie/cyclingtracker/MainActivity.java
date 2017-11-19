@@ -94,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.submit_button_sign_in:
                 Toast.makeText(this, "Check the info in the database", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, WhatsUpActivity.class);
+                startActivity(intent);
                 /* Insert database code here (Greg) */
                 if (pswdSignIn.getText().toString().isEmpty() || emailSignIn.getText().toString().isEmpty()) {
                     Toast.makeText(MainActivity.this, "Empty field(s).", Toast.LENGTH_SHORT).show();
