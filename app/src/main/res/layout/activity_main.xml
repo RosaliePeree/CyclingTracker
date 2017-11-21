@@ -3,171 +3,167 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_weight="2">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:id="@+id/layout_fragment_main">
 
-    <ScrollView android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_sign_in"
+            android:gravity="center"
+            android:text="@string/sign_in"
+            android:layout_weight="1"
+            android:background="@drawable/full_blue_button"
+            android:textSize="50sp"
+            android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_sign_up"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="@string/sign_up"
+            android:background="@drawable/full_blue_button"
+            android:textSize="50sp"
+            android:layout_margin="@dimen/activity_horizontal_margin"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:id="@+id/layout_fragment_sign_in">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:textSize="35sp"
+            android:id="@+id/text_view_username"
+            android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sign_button"
+            android:textSize="35sp"
+            android:maxLines="1"
+            android:inputType="textEmailAddress"
+            android:id="@+id/edit_text_username"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:padding="@dimen/activity_horizontal_margin"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/password"
+            android:textSize="35sp"
+            android:id="@+id/text_view_password"
+            android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sign_button"
+            android:textSize="35sp"
+            android:maxLines="1"
+            android:inputType="textPassword"
+            android:id="@+id/edit_text_passwd"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:padding="@dimen/activity_horizontal_margin"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/submit_button_sign_in"
+            android:text="@string/submit"
+            android:background="@drawable/full_blue_button"
+            android:textSize="35sp"
+            android:layout_margin="@dimen/activity_horizontal_margin"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollview" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:id="@+id/layout_fragment_sign_up">
+
+            <android.support.v7.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-            <LinearLayout
+                android:text="@string/create_username"
+                android:textSize="35sp"
+                android:id="@+id/text_create_username"
+                android:layout_margin="@dimen/activity_horizontal_margin"/>
+
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_centerInParent="true"
-                android:id="@+id/layout_fragment_main">
+                android:background="@drawable/sign_button"
+                android:textSize="35sp"
+                android:maxLines="1"
+                android:inputType="text"
+                android:id="@+id/edit_text_create_username"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:padding="@dimen/activity_horizontal_margin"/>
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/button_sign_in"
-                    android:gravity="center"
-                    android:text="@string/sign_in"
-                    android:layout_weight="1"
-                    android:background="@drawable/full_blue_button"
-                    android:textSize="50sp"
-                    android:layout_margin="@dimen/activity_horizontal_margin"/>
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/button_sign_up"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:text="@string/sign_up"
-                    android:background="@drawable/full_blue_button"
-                    android:textSize="50sp"
-                    android:layout_margin="@dimen/activity_horizontal_margin"/>
-            </LinearLayout>
-
-            <LinearLayout
+            <android.support.v7.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_centerInParent="true"
-                android:id="@+id/layout_fragment_sign_in">
+                android:text="@string/enter_email"
+                android:textSize="35sp"
+                android:id="@+id/text_create_email"
+                android:layout_margin="@dimen/activity_horizontal_margin"/>
 
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/email"
-                    android:textSize="35sp"
-                    android:id="@+id/text_view_username"
-                    android:layout_margin="@dimen/activity_horizontal_margin"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/sign_button"
-                    android:textSize="35sp"
-                    android:maxLines="1"
-                    android:inputType="textEmailAddress"
-                    android:id="@+id/edit_text_username"
-                    android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:padding="@dimen/activity_horizontal_margin"/>
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/password"
-                    android:textSize="35sp"
-                    android:id="@+id/text_view_password"
-                    android:layout_margin="@dimen/activity_horizontal_margin"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/sign_button"
-                    android:textSize="35sp"
-                    android:maxLines="1"
-                    android:inputType="textPassword"
-                    android:id="@+id/edit_text_passwd"
-                    android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:padding="@dimen/activity_horizontal_margin"/>
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/submit_button_sign_in"
-                    android:text="@string/submit"
-                    android:background="@drawable/full_blue_button"
-                    android:textSize="35sp"
-                    android:layout_margin="@dimen/activity_horizontal_margin"/>
-            </LinearLayout>
-
-            <LinearLayout
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_centerInParent="true"
-                android:id="@+id/layout_fragment_sign_up">
+                android:background="@drawable/sign_button"
+                android:textSize="35sp"
+                android:maxLines="1"
+                android:inputType="textEmailAddress"
+                android:id="@+id/edit_text_create_email"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:padding="@dimen/activity_horizontal_margin"/>
 
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/create_username"
-                    android:textSize="35sp"
-                    android:id="@+id/text_create_username"
-                    android:layout_margin="@dimen/activity_horizontal_margin"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/create_passwd"
+                android:textSize="35sp"
+                android:id="@+id/text_create_password"
+                android:layout_margin="@dimen/activity_horizontal_margin"/>
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/sign_button"
-                    android:textSize="35sp"
-                    android:maxLines="1"
-                    android:inputType="text"
-                    android:id="@+id/edit_text_create_username"
-                    android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:padding="@dimen/activity_horizontal_margin"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/sign_button"
+                android:textSize="35sp"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                android:id="@+id/edit_text_create_passwd"
+                android:layout_margin="@dimen/activity_horizontal_margin"
+                android:padding="@dimen/activity_horizontal_margin"/>
 
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/enter_email"
-                    android:textSize="35sp"
-                    android:id="@+id/text_create_email"
-                    android:layout_margin="@dimen/activity_horizontal_margin"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/sign_button"
-                    android:textSize="35sp"
-                    android:maxLines="1"
-                    android:inputType="textEmailAddress"
-                    android:id="@+id/edit_text_create_email"
-                    android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:padding="@dimen/activity_horizontal_margin"/>
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/create_passwd"
-                    android:textSize="35sp"
-                    android:id="@+id/text_create_password"
-                    android:layout_margin="@dimen/activity_horizontal_margin"/>
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/sign_button"
-                    android:textSize="35sp"
-                    android:maxLines="1"
-                    android:inputType="textPassword"
-                    android:id="@+id/edit_text_create_passwd"
-                    android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:padding="@dimen/activity_horizontal_margin"/>
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/submit_button_sign_on"
-                    android:text="@string/submit"
-                    android:background="@drawable/full_blue_button"
-                    android:textSize="35sp"
-                    android:layout_margin="@dimen/activity_horizontal_margin"/>
-            </LinearLayout>
-        </RelativeLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/submit_button_sign_on"
+                android:text="@string/submit"
+                android:background="@drawable/full_blue_button"
+                android:textSize="35sp"
+                android:layout_margin="@dimen/activity_horizontal_margin"/>
+        </LinearLayout>
     </ScrollView>
 </RelativeLayout>

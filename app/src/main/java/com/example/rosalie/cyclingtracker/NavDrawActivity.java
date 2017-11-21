@@ -51,11 +51,11 @@ public class NavDrawActivity extends AppCompatActivity
         user = mAuth.getCurrentUser();
 
         // MY_PREFS_NAME - a static String variable like:
-        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+        /*SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
         editor.putString("username",user.getDisplayName());
         Toast.makeText(this,user.getDisplayName(),Toast.LENGTH_SHORT).show();
         editor.putString("email", user.getEmail());
-        editor.apply();
+        editor.apply();*/
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +74,7 @@ public class NavDrawActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override

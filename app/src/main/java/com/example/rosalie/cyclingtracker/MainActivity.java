@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.example.rosalie.cyclingtracker.Database.User;
@@ -34,6 +35,7 @@ public class MainActivity extends NavDrawActivity implements View.OnClickListene
     Button buttonSignIn, buttonSignUp, buttonSubmitSignIn, buttonSubmitSignOn;
     EditText emailSignIn, pswdSignIn, pswdSignUp, usernameSignUp, emailSignUp;
     LinearLayout fragmentMain, fragmentSignIn, fragmentSignUp;
+    ScrollView scrollView;
 
     private static final String TAG = "MainActivity";
 
@@ -66,10 +68,12 @@ public class MainActivity extends NavDrawActivity implements View.OnClickListene
         fragmentMain = (LinearLayout) findViewById(R.id.layout_fragment_main);
         fragmentSignIn = (LinearLayout) findViewById(R.id.layout_fragment_sign_in);
         fragmentSignUp = (LinearLayout) findViewById(R.id.layout_fragment_sign_up);
+        scrollView = (ScrollView) findViewById(R.id.scrollview);
         //Set up the visibility to only display the main layout, aka the two first buttons to sign in and sign out
         fragmentMain.setVisibility(View.VISIBLE);
         fragmentSignUp.setVisibility(View.GONE);
         fragmentSignIn.setVisibility(View.GONE);
+        scrollView.setVisibility(View.GONE);
 
         //Find all the buttons on the layout and add listeners to them
         buttonSignIn = (Button)findViewById(R.id.button_sign_in);
@@ -89,11 +93,13 @@ public class MainActivity extends NavDrawActivity implements View.OnClickListene
                 //Hide the previous buttons and display the new buttons
                 fragmentMain.setVisibility(View.GONE);
                 fragmentSignIn.setVisibility(View.VISIBLE);
+                scrollView.setVisibility(View.GONE);
                 break;
 
             case R.id.button_sign_up:
                 fragmentMain.setVisibility(View.GONE);
                 fragmentSignUp.setVisibility(View.VISIBLE);
+                scrollView.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.submit_button_sign_in:
@@ -143,7 +149,7 @@ public class MainActivity extends NavDrawActivity implements View.OnClickListene
                                         User newUser = new User(emailSignUp.getText().toString(), usernameSignUp.getText().toString(), sas);
                                         myRef.child("users").child(user.getUid()).setValue(newUser);
 
-                                        Toast.makeText(MainActivity.this, "Creation of account successful. Please sign in",
+                                        Toast.makeText(MainActivity.this, "Creation of account successful",
                                                 Toast.LENGTH_SHORT).show();
                                         user = mAuth.getCurrentUser();
                                         if(user != null) {
@@ -186,6 +192,7 @@ public class MainActivity extends NavDrawActivity implements View.OnClickListene
         fragmentSignIn.setVisibility(View.GONE);
         fragmentSignUp.setVisibility(View.GONE);
         fragmentMain.setVisibility(View.VISIBLE);
+        scrollView.setVisibility(View.GONE);
     }
 }
 
