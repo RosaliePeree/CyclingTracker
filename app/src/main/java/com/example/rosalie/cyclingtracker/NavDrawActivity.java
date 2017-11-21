@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -29,6 +30,7 @@ public class NavDrawActivity extends AppCompatActivity
     protected FirebaseAuth mAuth;
     protected DatabaseReference myRef;
     protected FirebaseDatabase database;
+    protected FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class NavDrawActivity extends AppCompatActivity
         database = FirebaseDatabase.getInstance(); //Connection to the database
         mAuth = FirebaseAuth.getInstance();
         myRef = database.getReference();
+        user = mAuth.getCurrentUser();
 
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -99,6 +102,10 @@ public class NavDrawActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_about) {
             intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_log_out) {
+            mAuth.signOut();
+            intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
 

@@ -18,7 +18,6 @@
             android:gravity="center"
             android:text="@string/sign_in"
             android:layout_weight="1"
-            android:textColor="@color/colorPrimaryText"
             android:background="@drawable/full_blue_button"
             android:textSize="50sp"
             android:layout_margin="@dimen/activity_horizontal_margin"/>
@@ -30,7 +29,6 @@
             android:gravity="center"
             android:layout_weight="1"
             android:text="@string/sign_up"
-            android:textColor="@color/colorPrimaryText"
             android:background="@drawable/full_blue_button"
             android:textSize="50sp"
             android:layout_margin="@dimen/activity_horizontal_margin"/>
@@ -47,7 +45,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/email"
-            android:textColor="@color/colorPrimaryText"
             android:textSize="35sp"
             android:id="@+id/text_view_username"
             android:layout_margin="@dimen/activity_horizontal_margin"/>
@@ -55,7 +52,6 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryText"
             android:background="@drawable/sign_button"
             android:textSize="35sp"
             android:maxLines="1"
@@ -68,7 +64,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/password"
-            android:textColor="@color/colorPrimaryText"
             android:textSize="35sp"
             android:id="@+id/text_view_password"
             android:layout_margin="@dimen/activity_horizontal_margin"/>
@@ -76,7 +71,6 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryText"
             android:background="@drawable/sign_button"
             android:textSize="35sp"
             android:maxLines="1"
@@ -90,7 +84,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/submit_button_sign_in"
             android:text="@string/submit"
-            android:textColor="@color/colorPrimaryText"
             android:background="@drawable/full_blue_button"
             android:textSize="35sp"
             android:layout_margin="@dimen/activity_horizontal_margin"/>
@@ -107,7 +100,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/create_username"
-            android:textColor="@color/colorPrimaryText"
             android:textSize="35sp"
             android:id="@+id/text_create_username"
             android:layout_margin="@dimen/activity_horizontal_margin"/>
@@ -115,7 +107,6 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryText"
             android:background="@drawable/sign_button"
             android:textSize="35sp"
             android:maxLines="1"
@@ -128,7 +119,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/enter_email"
-            android:textColor="@color/colorPrimaryText"
             android:textSize="35sp"
             android:id="@+id/text_create_email"
             android:layout_margin="@dimen/activity_horizontal_margin"/>
@@ -136,7 +126,6 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryText"
             android:background="@drawable/sign_button"
             android:textSize="35sp"
             android:maxLines="1"
@@ -149,7 +138,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/create_passwd"
-            android:textColor="@color/colorPrimaryText"
             android:textSize="35sp"
             android:id="@+id/text_create_password"
             android:layout_margin="@dimen/activity_horizontal_margin"/>
@@ -157,7 +145,6 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryText"
             android:background="@drawable/sign_button"
             android:textSize="35sp"
             android:maxLines="1"
@@ -171,7 +158,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/submit_button_sign_on"
             android:text="@string/submit"
-            android:textColor="@color/colorPrimaryText"
             android:background="@drawable/full_blue_button"
             android:textSize="35sp"
             android:layout_margin="@dimen/activity_horizontal_margin"/>

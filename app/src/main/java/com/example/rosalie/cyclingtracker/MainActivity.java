@@ -49,7 +49,17 @@ public class MainActivity extends NavDrawActivity implements View.OnClickListene
         pswdSignUp =  (EditText) findViewById(R.id.edit_text_create_passwd);
         emailSignUp = (EditText) findViewById(R.id.edit_text_create_email);
         usernameSignUp = (EditText) findViewById(R.id.edit_text_create_username);
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        if(user != null)
+        {
+            Intent intent = new Intent(this,WhatsUpActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void setButtonsListener(){
@@ -133,11 +143,11 @@ public class MainActivity extends NavDrawActivity implements View.OnClickListene
                                         User newUser = new User(emailSignUp.getText().toString(), usernameSignUp.getText().toString(), sas);
                                         myRef.child("users").child(user.getUid()).setValue(newUser);
 
-                                        Toast.makeText(MainActivity.this, "Creation of account successful.",
+                                        Toast.makeText(MainActivity.this, "Creation of account successful. Please sign in",
                                                 Toast.LENGTH_SHORT).show();
 
-                                        Intent intents = new Intent(MainActivity.this, AboutActivity.class);
-                                        startActivity(intents);
+                                        fragmentSignUp.setVisibility(View.GONE);
+                                        fragmentSignIn.setVisibility(View.VISIBLE);
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         FirebaseAuthException e = (FirebaseAuthException )task.getException();

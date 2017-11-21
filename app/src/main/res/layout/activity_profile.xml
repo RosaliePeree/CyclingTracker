@@ -6,15 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_marginTop="?attr/actionBarSize"
     tools:context="com.example.rosalie.cyclingtracker.ProfileActivity">
 
     <ImageView
         android:id="@+id/profile_pic"
+        android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="60dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/profile_pic" />

@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 public class AboutActivity extends NavDrawActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

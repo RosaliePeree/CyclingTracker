@@ -23,6 +23,8 @@ public class SettingsActivity extends NavDrawActivity{
         View contentView = inflater.inflate(R.layout.activity_settings, null, false);
         drawer.addView(contentView, 0);
 
+
+
         toolbar.setTitle(R.string.nav_settings);
     }
 
