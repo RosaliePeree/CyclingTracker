@@ -4,6 +4,7 @@ package com.example.rosalie.cyclingtracker;
  * Created by Rose on 07-11-2017.
  */
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -32,6 +33,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import static com.example.rosalie.cyclingtracker.SettingsActivity.MY_PREFS_NAME;
+
 public class NavDrawActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -44,8 +47,9 @@ public class NavDrawActivity extends AppCompatActivity
     protected FirebaseUser user;
     protected static User currentUser;
     protected static ArrayList<Ride> allRides;
-
-    public static final String MY_PREFS_NAME = "MyPrefsFile";
+    public static SharedPreferences getSharedPreferences (Context ctxt) {
+        return ctxt.getSharedPreferences("FILE", 0);
+    }
 
 
     @Override
@@ -83,13 +87,6 @@ public class NavDrawActivity extends AppCompatActivity
 
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-        // MY_PREFS_NAME - a static String variable like:
-        /*SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-        editor.putString("username",user.getDisplayName());
-        Toast.makeText(this,user.getDisplayName(),Toast.LENGTH_SHORT).show();
-        editor.putString("email", user.getEmail());
-        editor.apply();*/
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
