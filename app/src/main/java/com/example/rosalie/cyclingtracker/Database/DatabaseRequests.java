@@ -67,7 +67,7 @@ public class DatabaseRequests extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     User use = dataSnapshot.getValue(User.class);
                     Log.i(use.getName(), " user");
-                    connectedUser = use;
+                    //connectedUser = use;
                 }
 
                 @Override
@@ -80,8 +80,8 @@ public class DatabaseRequests extends AppCompatActivity {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //Ride ride = dataSnapshot.getValue(Ride.class);
-                //Log.i(ride.getDate(), " date");
+                Ride ride = dataSnapshot.getValue(Ride.class);
+                Log.i(ride.getDate(), " date");
 
                 for(DataSnapshot dsp : dataSnapshot.getChildren()) {
                     allRides.add((dsp.getValue(Ride.class)));
@@ -153,4 +153,5 @@ public class DatabaseRequests extends AppCompatActivity {
 
         myRef.child("users").child(userID).setValue(newUser);
     }
+
 }

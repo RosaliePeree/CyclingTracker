@@ -9,7 +9,7 @@ import java.util.List;
 public class User {
     private String mail;
     private String name;
-    private List<String> ride;
+    private List<String> rides;
 
     public User() {
     }
@@ -17,7 +17,7 @@ public class User {
     public User(String mail, String name, List<String> ride) {
         this.mail = mail;
         this.name = name;
-        this.ride = ride;
+        this.rides = ride;
     }
 
     public String getMail() {
@@ -28,8 +28,8 @@ public class User {
         return name;
     }
 
-    public List<String> getRide() {
-        return ride;
+    public List<String> getRides() {
+        return rides;
     }
 
     public void setMail(String mail) {
@@ -40,7 +40,7 @@ public class User {
         this.name = name;
     }
 
-    public void setRide(List<String> ride) {
-        this.ride = ride;
+    public void setRides(List<String> rides) {
+        this.rides = rides;
     }
 }

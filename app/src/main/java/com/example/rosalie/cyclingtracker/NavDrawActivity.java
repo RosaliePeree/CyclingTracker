@@ -7,6 +7,7 @@ package com.example.rosalie.cyclingtracker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,11 +16,19 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.rosalie.cyclingtracker.Database.Ride;
+import com.example.rosalie.cyclingtracker.Database.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class NavDrawActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,6 +40,8 @@ public class NavDrawActivity extends AppCompatActivity
     protected DatabaseReference myRef;
     protected FirebaseDatabase database;
     protected FirebaseUser user;
+    protected static User currentUser;
+    protected static ArrayList<Ride> allRides;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +55,27 @@ public class NavDrawActivity extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
         myRef = database.getReference();
         user = mAuth.getCurrentUser();
+    if(mAuth.getCurrentUser() != null) {
+        myRef.child("users/" + mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() { //Gets the info about the connected user and put it in connected USer
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User use = dataSnapshot.getValue(User.class);
+                Log.i(use.getName(), " user");
+                currentUser = use;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }else{
+        Toast.makeText(NavDrawActivity.this, "Please reconnect !",
+                Toast.LENGTH_LONG).show();
+    }
+
 
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
