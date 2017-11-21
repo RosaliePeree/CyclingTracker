@@ -29,14 +29,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends NavDrawActivity implements View.OnClickListener{
 
     Button buttonSignIn, buttonSignUp, buttonSubmitSignIn, buttonSubmitSignOn;
     EditText emailSignIn, pswdSignIn, pswdSignUp, usernameSignUp, emailSignUp;
     LinearLayout fragmentMain, fragmentSignIn, fragmentSignUp;
-    private FirebaseAuth mAuth;
-    private DatabaseReference myRef;
-
 
     private static final String TAG = "MainActivity";
 
@@ -44,11 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTheme(android.R.style.Theme_DeviceDefault_Light_DarkActionBar);
         setButtonsListener();
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance(); //Connection to the database
-        mAuth = FirebaseAuth.getInstance();
-        myRef = database.getReference();
 
         emailSignIn = (EditText) findViewById(R.id.edit_text_username);
         pswdSignIn = (EditText) findViewById(R.id.edit_text_passwd);
@@ -94,13 +88,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.submit_button_sign_in:
                 Toast.makeText(this, "Check the info in the database", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, WhatsUpActivity.class);
-                startActivity(intent);
                 /* Insert database code here (Greg) */
                 if (pswdSignIn.getText().toString().isEmpty() || emailSignIn.getText().toString().isEmpty()) {
                     Toast.makeText(MainActivity.this, "Empty field(s).", Toast.LENGTH_SHORT).show();
                 }else {
-
                     mAuth.signInWithEmailAndPassword(emailSignIn.getText().toString(), pswdSignIn.getText().toString())
                             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                                 @Override
