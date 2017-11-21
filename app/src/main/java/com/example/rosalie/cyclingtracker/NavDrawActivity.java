@@ -5,6 +5,7 @@ package com.example.rosalie.cyclingtracker;
  */
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,6 +34,9 @@ public class NavDrawActivity extends AppCompatActivity
     protected FirebaseDatabase database;
     protected FirebaseUser user;
 
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +50,12 @@ public class NavDrawActivity extends AppCompatActivity
         myRef = database.getReference();
         user = mAuth.getCurrentUser();
 
+        // MY_PREFS_NAME - a static String variable like:
+        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+        editor.putString("username",user.getDisplayName());
+        Toast.makeText(this,user.getDisplayName(),Toast.LENGTH_SHORT).show();
+        editor.putString("email", user.getEmail());
+        editor.apply();
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

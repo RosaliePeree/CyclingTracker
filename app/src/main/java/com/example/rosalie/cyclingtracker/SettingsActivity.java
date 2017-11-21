@@ -10,9 +10,12 @@ import android.preference.PreferenceFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SettingsActivity extends NavDrawActivity{
+
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +25,6 @@ public class SettingsActivity extends NavDrawActivity{
         //inflate your activity layout here!
         View contentView = inflater.inflate(R.layout.activity_settings, null, false);
         drawer.addView(contentView, 0);
-
-
 
         toolbar.setTitle(R.string.nav_settings);
     }
