@@ -6,6 +6,7 @@ package com.example.rosalie.cyclingtracker;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -49,6 +50,8 @@ public class NavDrawActivity extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
         myRef = database.getReference();
         user = mAuth.getCurrentUser();
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // MY_PREFS_NAME - a static String variable like:
         /*SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
