@@ -145,9 +145,11 @@ public class MainActivity extends NavDrawActivity implements View.OnClickListene
 
                                         Toast.makeText(MainActivity.this, "Creation of account successful. Please sign in",
                                                 Toast.LENGTH_SHORT).show();
-
-                                        fragmentSignUp.setVisibility(View.GONE);
-                                        fragmentSignIn.setVisibility(View.VISIBLE);
+                                        user = mAuth.getCurrentUser();
+                                        if(user != null) {
+                                            Intent intent = new Intent(getBaseContext(), WhatsUpActivity.class);
+                                            startActivity(intent);
+                                        }
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         FirebaseAuthException e = (FirebaseAuthException )task.getException();

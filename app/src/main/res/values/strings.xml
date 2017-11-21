@@ -69,7 +69,6 @@
     <string name="error_connection">Your email address or password is not correct</string>
     <string name="submit">Submit</string>
 
-
     <!-- Strings for the about activity -->
     <string name="about_title_us"><u>Our team</u></string>
     <string name="about_content_us">App made by Rose, Greg (and Filip)</string>
