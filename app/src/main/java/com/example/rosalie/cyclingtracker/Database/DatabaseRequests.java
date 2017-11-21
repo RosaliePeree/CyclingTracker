@@ -152,6 +152,7 @@ public class DatabaseRequests extends AppCompatActivity {
         User newUser = new User( mail,  name,  ride);
 
         myRef.child("users").child(userID).setValue(newUser);
+
     }
 
 }

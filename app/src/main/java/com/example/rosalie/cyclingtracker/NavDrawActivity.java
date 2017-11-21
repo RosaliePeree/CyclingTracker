@@ -29,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NavDrawActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -55,6 +56,7 @@ public class NavDrawActivity extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
         myRef = database.getReference();
         user = mAuth.getCurrentUser();
+        allRides = new ArrayList<>();
     if(mAuth.getCurrentUser() != null) {
         myRef.child("users/" + mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() { //Gets the info about the connected user and put it in connected USer
             @Override
@@ -70,16 +72,25 @@ public class NavDrawActivity extends AppCompatActivity
             }
         });
 
+
+    }else{
+        Toast.makeText(NavDrawActivity.this, "Please reconnect !",
+                Toast.LENGTH_LONG).show();
+    }
+
         myRef.child("rides").addValueEventListener(new ValueEventListener() { //gets all of the Rides and store them in the allRides list
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Ride ride = dataSnapshot.getValue(Ride.class);
-                Log.i(ride.getDate(), " date");
+                //Ride ride = dataSnapshot.getValue(Ride.class);
+                //Log.i(ride.getDate(), " date");
 
                 for(DataSnapshot dsp : dataSnapshot.getChildren()) {
-                    allRides.add((dsp.getValue(Ride.class)));
+                    //allRides.add((dsp.getValue(Ride.class)));
                     Log.i(dsp.getValue(Ride.class).getDate(), " date");
+                    Log.i( dsp.getValue(Ride.class).getDistance() + "", " distance");
+                    Log.i( dsp.getValue(Ride.class).getAverage_speed() + "", " average");
+                    allRides.add(dsp.getValue(Ride.class));
                 }
 
             }
@@ -88,13 +99,6 @@ public class NavDrawActivity extends AppCompatActivity
 
             }
         });
-
-
-    }else{
-        Toast.makeText(NavDrawActivity.this, "Please reconnect !",
-                Toast.LENGTH_LONG).show();
-    }
-
 
 
 

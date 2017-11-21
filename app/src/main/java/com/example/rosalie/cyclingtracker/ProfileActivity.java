@@ -51,7 +51,7 @@ public class ProfileActivity extends NavDrawActivity {
 
     private void addRideUser(String userID){
         if(currentUser.getRides() == null) {
-            //myRef.child("users").child(userID).child("rides").child("0").setValue("ride" + );
+            myRef.child("users").child(userID).child("rides").child("0").setValue("ride" + allRides.size());
         }
     }
 }
