@@ -24,8 +24,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +54,7 @@ public class MainActivity extends NavDrawActivity implements View.OnClickListene
         pswdSignUp =  (EditText) findViewById(R.id.edit_text_create_passwd);
         emailSignUp = (EditText) findViewById(R.id.edit_text_create_email);
         usernameSignUp = (EditText) findViewById(R.id.edit_text_create_username);
+
     }
 
     @Override
@@ -145,8 +149,7 @@ public class MainActivity extends NavDrawActivity implements View.OnClickListene
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "createUserWithEmail:success");
                                         FirebaseUser user = mAuth.getCurrentUser();
-                                        List<String> sas = new ArrayList<>();
-                                        User newUser = new User(emailSignUp.getText().toString(), usernameSignUp.getText().toString(), sas);
+                                        User newUser = new User(emailSignUp.getText().toString(), usernameSignUp.getText().toString(), null);
                                         myRef.child("users").child(user.getUid()).setValue(newUser);
 
                                         Toast.makeText(MainActivity.this, "Creation of account successful",
