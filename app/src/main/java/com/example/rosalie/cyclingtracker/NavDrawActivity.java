@@ -4,7 +4,10 @@ package com.example.rosalie.cyclingtracker;
  * Created by Rose on 07-11-2017.
  */
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
@@ -31,6 +34,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.rosalie.cyclingtracker.SettingsActivity.MY_PREFS_NAME;
+
 public class NavDrawActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -43,6 +48,10 @@ public class NavDrawActivity extends AppCompatActivity
     protected FirebaseUser user;
     protected static User currentUser;
     protected static ArrayList<Ride> allRides;
+    public static SharedPreferences getSharedPreferences (Context ctxt) {
+        return ctxt.getSharedPreferences("FILE", 0);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +65,6 @@ public class NavDrawActivity extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
         myRef = database.getReference();
         user = mAuth.getCurrentUser();
-        allRides = new ArrayList<>();
     if(mAuth.getCurrentUser() != null) {
         myRef.child("users/" + mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() { //Gets the info about the connected user and put it in connected USer
             @Override
@@ -71,12 +79,6 @@ public class NavDrawActivity extends AppCompatActivity
 
             }
         });
-
-
-    }else{
-        Toast.makeText(NavDrawActivity.this, "Please reconnect !",
-                Toast.LENGTH_LONG).show();
-    }
 
         myRef.child("rides").addValueEventListener(new ValueEventListener() { //gets all of the Rides and store them in the allRides list
 
@@ -101,6 +103,14 @@ public class NavDrawActivity extends AppCompatActivity
         });
 
 
+    }else{
+        Toast.makeText(NavDrawActivity.this, "Please reconnect !",
+                Toast.LENGTH_LONG).show();
+    }
+
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +129,7 @@ public class NavDrawActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
