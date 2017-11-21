@@ -79,6 +79,25 @@ public class NavDrawActivity extends AppCompatActivity
             }
         });
 
+        myRef.child("rides").addValueEventListener(new ValueEventListener() { //gets all of the Rides and store them in the allRides list
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Ride ride = dataSnapshot.getValue(Ride.class);
+                Log.i(ride.getDate(), " date");
+
+                for(DataSnapshot dsp : dataSnapshot.getChildren()) {
+                    allRides.add((dsp.getValue(Ride.class)));
+                    Log.i(dsp.getValue(Ride.class).getDate(), " date");
+                }
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
     }else{
         Toast.makeText(NavDrawActivity.this, "Please reconnect !",
@@ -87,6 +106,7 @@ public class NavDrawActivity extends AppCompatActivity
 
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
