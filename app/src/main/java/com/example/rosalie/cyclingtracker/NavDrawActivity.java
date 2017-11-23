@@ -65,6 +65,7 @@ public class NavDrawActivity extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
         myRef = database.getReference();
         user = mAuth.getCurrentUser();
+        allRides = new ArrayList<Ride>();
     if(mAuth.getCurrentUser() != null) {
         myRef.child("users/" + mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() { //Gets the info about the connected user and put it in connected USer
             @Override

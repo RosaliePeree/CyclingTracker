@@ -43,7 +43,7 @@ public class ProfileActivity extends NavDrawActivity {
         mail_text.setText(currentUser.getMail());
 
 
-        addRideUser(mAuth.getCurrentUser().getUid());
+        //addRideUser(mAuth.getCurrentUser().getUid());
 
 
 

@@ -71,7 +71,7 @@
 
     <!-- Strings for the about activity -->
     <string name="about_title_us"><u>Our team</u></string>
-    <string name="about_content_us">App made by Rose, Greg (and Filip)</string>
+    <string name="about_content_us">App made by Rose, Greg and Filip</string>
     <string name="about_title"><u>A bit more about us</u></string>
     <string name="about_content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel tristique diam. Proin mollis mauris ex, vel placerat eros venenatis sit amet. Duis eget consequat quam. Donec arcu metus, venenatis ac mattis vitae, rhoncus faucibus orci. Maecenas ac facilisis velit. Praesent sed neque euismod, egestas velit eget, tristique tellus. Donec cursus ornare sem, at gravida tortor cursus quis. Quisque a justo ac libero laoreet venenatis vel id nisl. Cras et venenatis nulla. Sed interdum mi vel sodales dignissim. Phasellus porta nec elit eu commodo. Nam a massa dictum, euismod diam vitae, vehicula leo. Quisque ornare rhoncus nulla, a congue neque sodales ut. Vestibulum efficitur eros non tortor sollicitudin iaculis.<br />Suspendisse placerat accumsan orci, in elementum erat pretium nec. Mauris pulvinar maximus libero. Ut lectus odio, finibus at congue ac, dignissim eu ligula. In quis ligula sed risus pellentesque tempor. Aenean pretium a tellus in sollicitudin. Integer volutpat volutpat ipsum, id sollicitudin arcu efficitur eu. Donec a massa vel lorem vehicula vestibulum ultrices sit amet tellus. Sed iaculis libero suscipit tempus accumsan. Nullam gravida interdum faucibus. Donec consequat rhoncus sem at faucibus. Maecenas quis tortor eu ante pharetra accumsan. Sed sit amet diam et magna fringilla commodo nec a nisl. Quisque ultrices sagittis lacus, porta dapibus eros aliquam nec.</string>
 
