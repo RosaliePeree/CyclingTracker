@@ -4,6 +4,7 @@ package com.example.rosalie.cyclingtracker;
  * Created by Rose on 07-11-2017.
  */
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,10 +22,10 @@ import java.util.List;
 
 public class ProfileActivity extends NavDrawActivity {
 
-    TextView username_text, mail_text;
-    ListView list_rides;
+    TextView username_text, mail_text, distance_text, time_text, averagespeed_text, date_text;
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +38,28 @@ public class ProfileActivity extends NavDrawActivity {
         toolbar.setTitle(R.string.nav_profile);
         username_text = (TextView) findViewById(R.id.username_profile);
         mail_text = (TextView) findViewById(R.id.email_profile);
-        list_rides = (ListView) findViewById(R.id.list_of_rides);
+        distance_text = (TextView) findViewById(R.id.distance_lastride);
+        averagespeed_text = (TextView) findViewById(R.id.averagespeed_lastride);
+        date_text = (TextView) findViewById(R.id.date_lastride);
+        time_text = (TextView) findViewById(R.id.time_lastride);
+
+        if(currentUser.getRides() != null) {
+            int index = currentUser.getRides().size();
+            String toParse = currentUser.getRides().get(index - 1);
+            String[] yolo = toParse.split("ride");
+            index = Integer.parseInt(yolo[1]) - 1;
+
+            distance_text.setText("Distance : " + String.valueOf(allRides.get(index).getDistance()));
+            averagespeed_text.setText("Average Speed : " + String.valueOf(allRides.get(index).getAverage_speed()));
+            date_text.setText("Date : " + allRides.get(index).getDate());
+            time_text.setText("Time : " + String.valueOf(allRides.get(index).getTime()));
+
+        }else{
+            distance_text.setText("");
+            averagespeed_text.setText("");
+            date_text.setText("No record to display !");
+            time_text.setText("");
+        }
 
         username_text.setText(currentUser.getName());
         mail_text.setText(currentUser.getMail());
@@ -50,8 +72,6 @@ public class ProfileActivity extends NavDrawActivity {
     }
 
     private void addRideUser(String userID){
-        if(currentUser.getRides() == null) {
-            myRef.child("users").child(userID).child("rides").child("0").setValue("ride" + allRides.size());
-        }
+
     }
 }

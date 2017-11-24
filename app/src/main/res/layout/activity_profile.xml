@@ -1,65 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<AbsoluteLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_marginTop="?attr/actionBarSize"
-    tools:context="com.example.rosalie.cyclingtracker.ProfileActivity">
+    android:orientation="vertical"
+    tools:context="com.example.rosalie.cyclingtracker.ProfileActivity"
+    >
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/profile_pic"
+        android:layout_width="120dp"
+        android:layout_height="122dp"
+
+
+        android:layout_x="0dp"
+        android:layout_y="72dp"
+        android:src="@drawable/prfpic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/username_profile"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:layout_gravity="center">
-        <ImageView
-            android:id="@+id/profile_pic"
-            android:layout_marginTop="56dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/profile_pic"
-            tools:layout_editor_absoluteX="60dp" />
 
-        <TextView
-            android:id="@+id/username_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="TextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.405"
-            app:layout_constraintStart_toEndOf="@+id/profile_pic"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="198dp" />
+        android:layout_x="165dp"
+        android:layout_y="107dp"
+        android:text="TextView" />
 
-        <TextView
-            android:id="@+id/email_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/username_profile"
-            app:layout_constraintVertical_bias="0.046"
-            tools:layout_editor_absoluteX="200dp" />
+    <TextView
+        android:id="@+id/email_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="364dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.957"
-            tools:layout_editor_absoluteX="0dp" />
-    </android.support.constraint.ConstraintLayout>
-</LinearLayout>
+        android:layout_x="165dp"
+        android:layout_y="166dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/lastrecord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="0dp"
+        android:layout_y="240dp"
+        android:text="@string/last_record"
+
+        />
+
+    <TextView
+        android:id="@+id/date_lastride"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="0dp"
+        android:layout_y="280dp"
+        android:text="LAST RECORDOOOOOO" />
+
+    <TextView
+        android:id="@+id/distance_lastride"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="0dp"
+        android:layout_y="392dp"
+        android:text="00000" />
+
+    <TextView
+        android:id="@+id/averagespeed_lastride"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_x="0dp"
+        android:layout_y="350dp"
+        android:text="speed" />
+
+    <TextView
+        android:id="@+id/time_lastride"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="0dp"
+        android:layout_y="316dp"
+        android:text="time" />
+
+
+</AbsoluteLayout>

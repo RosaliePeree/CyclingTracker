@@ -65,7 +65,7 @@ public class NavDrawActivity extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
         myRef = database.getReference();
         user = mAuth.getCurrentUser();
-        allRides = new ArrayList<Ride>();
+
     if(mAuth.getCurrentUser() != null) {
         myRef.child("users/" + mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() { //Gets the info about the connected user and put it in connected USer
             @Override
@@ -87,12 +87,9 @@ public class NavDrawActivity extends AppCompatActivity
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //Ride ride = dataSnapshot.getValue(Ride.class);
                 //Log.i(ride.getDate(), " date");
-
+                allRides = new ArrayList<Ride>();
                 for(DataSnapshot dsp : dataSnapshot.getChildren()) {
                     //allRides.add((dsp.getValue(Ride.class)));
-                    Log.i(dsp.getValue(Ride.class).getDate(), " date");
-                    Log.i( dsp.getValue(Ride.class).getDistance() + "", " distance");
-                    Log.i( dsp.getValue(Ride.class).getAverage_speed() + "", " average");
                     allRides.add(dsp.getValue(Ride.class));
                 }
 

@@ -141,7 +141,7 @@ public class DatabaseRequests extends AppCompatActivity {
         }
     }
 
-    private void writeNewRide(double average_speed, String date, double distance, int id, double time){ //Creates a new ride
+    private void writeNewRide(double average_speed, String date, double distance, int id, long time){ //Creates a new ride
         Ride newRide = new Ride( average_speed,  date,  distance,  id,  time);
 
         myRef.child("rides").child("ride"+id).setValue(newRide);

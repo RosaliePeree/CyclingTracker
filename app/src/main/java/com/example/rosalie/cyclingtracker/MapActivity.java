@@ -5,6 +5,8 @@ package com.example.rosalie.cyclingtracker;
  * Created by Filip_PC on 16-11-2017
  */
 
+import com.example.rosalie.cyclingtracker.Database.Ride;
+import com.example.rosalie.cyclingtracker.Database.User;
 import com.example.rosalie.cyclingtracker.Map.CLocation;
 import com.example.rosalie.cyclingtracker.Map.IBaseGpsListener;
 
@@ -16,6 +18,7 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 import android.content.Context;
 import android.Manifest;
+import android.content.Intent;
 import android.graphics.Color;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -28,6 +31,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -36,6 +40,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -78,6 +85,20 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     double iPromiseThisIsTheEndDistance = 0;
     double returnedDistance = 0;
 
+    float setMinimalspeed = 3;
+    float setMaximumspeed = 80;
+    float bCurrentSpeed = 0;
+    public boolean speedCondition = true;
+    boolean tooFast = false;
+    boolean tooSlow = false;
+
+    private DatabaseReference myRef;
+    private FirebaseDatabase database;
+    private FirebaseUser user;
+    private static User currentUser;
+    private static ArrayList<Ride> allRides;
+
+
 
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
@@ -90,12 +111,13 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         points = new ArrayList<LatLng>(); //initialize an arraylist positions on the map
 
         setContentView(R.layout.activity_map);
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+        final LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
                 .addLocationRequest(mLocationRequest);
 
         builder.setAlwaysShow(true);
@@ -116,6 +138,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
             return;
         }
 
+        //  LatLng currentLatLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
+        // mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 17));
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, this);
         this.updateSpeed(null);
@@ -141,11 +165,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
 
                                                stopped = true;
-                                               startPoint = points.get(0);
-                                               endPoint = points.get(points.size() - 1);
+                                               //startPoint = points.get(0);
+                                               //endPoint = points.get(points.size() - 1);
                                                activityLength = startTime;
                                                returnedHighestSpeed = highestSpeed;
                                                returnedLowestSpeed = lowestSpeed;
+
 
                                                for (int i = 0; i < points.size() - 1; i++) {
                                                    LatLng temp = points.get(i);
@@ -163,12 +188,29 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                                                buttonState = 1;
 
                                                Date cDate = new Date();
-                                               String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);  //Create date of the activity
+                                               String fDate = new SimpleDateFormat("dd/MM/yyyy").format(cDate);  //Create date of the activity
                                                points = new ArrayList<LatLng>();
                                                lowestSpeed = 0;
                                                highestSpeed = 0;
 
                                                mMap.clear();
+
+                                               Intent intent = new Intent(MapActivity.this, WhatsUpActivity.class);
+
+                                               intent.putExtra("done", true);
+                                               intent.putExtra("distance", iPromiseThisIsTheEndDistance);
+                                               intent.putExtra("date", fDate);
+                                               //intent.putExtra("highestSpeed", returnedHighestSpeed); will be implemented later
+                                               //intent.putExtra("lowestSpeed", returnedLowestSpeed);
+                                               String timeToParse = currentTime.getText().toString();
+                                               double timeToSend = 0;
+                                               String[] tokens = timeToParse.split(":");
+                                               timeToParse = tokens[0] + " " + tokens[1] + " " + tokens[2];
+                                               timeToSend = ((Double.parseDouble(tokens[0])) + (Double.parseDouble("0." + tokens[1])));
+                                               Log.i("time", timeToParse);
+                                               intent.putExtra("time", timeToSend );
+                                               startActivityForResult(intent, 1);
+
                                            }
 
                                        }
@@ -180,32 +222,42 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         btnStart.setOnClickListener(new View.OnClickListener() // button for starting and pausing the exercise
 
         {
+
             @Override
             public void onClick(View view) {
+
                 if (buttonState == 1) {
+
                     mStarted = true;
                     mHandler.postDelayed(mRunnable, 10L);
                     startTime = System.currentTimeMillis();
+
                     buttonState = 2;
                 } else if (buttonState == 2)
 
                 {
 
                     mStarted = false;
-                    mHandler.removeCallbacks(mRunnable);
+                    mHandler.removeCallbacks(mRunnable); // add a variable and store the value as double and add it to the counter
                     pauseTime = System.currentTimeMillis();
+
+
                     buttonState = 3;
                 } else if (buttonState == 3) {
-                    mStarted = true;
 
+
+                    mStarted = true;
                     mHandler.postDelayed(mRunnable, 10L);
                     startTime = startTime - pauseTime;
                     mHandler.removeCallbacks(mRunnable);
                     mHandler.postDelayed(mRunnable, 10L);
                     startTime += System.currentTimeMillis();
+
                     buttonState = 2;
                 }
             }
+
+
 
 
         });
@@ -221,10 +273,28 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
         if (location != null) {
             nCurrentSpeed = location.getSpeed();
+
             if (lowestSpeed > nCurrentSpeed) lowestSpeed = nCurrentSpeed;
             else if (highestSpeed < nCurrentSpeed) highestSpeed = nCurrentSpeed;
         }
-
+        if (nCurrentSpeed > setMinimalspeed && nCurrentSpeed < setMaximumspeed)
+        {
+            speedCondition = true;
+            tooFast = false;
+            tooSlow = false;
+        }
+        else if (nCurrentSpeed < setMinimalspeed)
+        {
+            speedCondition = false;
+            tooFast = false;
+            tooSlow = true;
+        }
+        else if (nCurrentSpeed > setMaximumspeed)
+        {
+            speedCondition = false;
+            tooFast = true;
+            tooSlow = false;
+        }
 
         Formatter fmt = new Formatter(new StringBuilder());
         fmt.format(Locale.US, "%5.1f", nCurrentSpeed);
@@ -232,8 +302,19 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         strCurrentSpeed = strCurrentSpeed.replace(' ', '0');
 
         String strUnits = "kilometers/hour";
+
         TextView txtCurrentSpeed = (TextView) this.findViewById(R.id.txtCurrentSpeed);
-        txtCurrentSpeed.setText(strCurrentSpeed + " " + strUnits);
+        if (tooSlow == true)
+        {
+            String tooSlow = "You are moving too slow!";
+            txtCurrentSpeed.setText(tooSlow);
+        }
+        else if(tooFast == true )
+        {
+            String tooFst = "You are moving too fast!";
+            txtCurrentSpeed.setText(tooFst);
+        }
+        else txtCurrentSpeed.setText(strCurrentSpeed + " " + strUnits);
     }
 
     @Override
@@ -248,11 +329,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
             if (mStarted) {
                 long milis = (System.currentTimeMillis() - startTime);
                 long seconds = milis / 1000;
-                currentTime.setText(String.format("%02d:%02d:%02d", seconds / 60, seconds % 60, milis % 100));
+                currentTime.setText(String.format("%03d:%02d:%02d", seconds / 60, seconds % 60, milis % 100));
                 mHandler.postDelayed(mRunnable, 10L);
             }
         }
-
     };
 
     @Override
@@ -281,30 +361,35 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
             points.add(latLng);
             addMarker();
             redrawLine();
+
         }
         mCurrentLocation = location;
     }
 
     private void redrawLine() {
-
-        mMap.clear();  //clears all Markers and Polylines
-        PolylineOptions options = new PolylineOptions().width(5).color(Color.BLUE).geodesic(true);
-        for (int i = 0; i < points.size(); i++) {
-            LatLng point = points.get(i);
-            options.add(point);
+        if (speedCondition == true) {
+            mMap.clear();  //clears all Markers and Polylines
+            PolylineOptions options = new PolylineOptions().width(5).color(Color.BLUE).geodesic(true);
+            for (int i = 0; i < points.size(); i++) {
+                LatLng point = points.get(i);
+                options.add(point);
+            }
+            addMarker(); //add Marker in current position
+            line = mMap.addPolyline(options); //add Polyline
         }
-        addMarker(); //add Marker in current position
-        line = mMap.addPolyline(options); //add Polyline
     }
 
     private void addMarker() {
+
         MarkerOptions options = new MarkerOptions();
         LatLng currentLatLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
         options.position(currentLatLng);
         mMap.addMarker(options);
         Log.d(TAG, "Marker added...");
+
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 17));
         Log.d(TAG, "Zoom done...");
+
     }
 
     @Override
@@ -375,4 +460,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         manager.requestLocationUpdates(provider, 10000, 10, this);
     }
 */
+
+
 }
