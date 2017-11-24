@@ -5,6 +5,7 @@ package com.example.rosalie.cyclingtracker;
  */
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ public class WhatsUpActivity extends NavDrawActivity {
 
     ListView listView;
     TextView whatnew;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,25 +40,24 @@ public class WhatsUpActivity extends NavDrawActivity {
         listView = (ListView) findViewById(R.id.list_of_rides);
         ArrayList<Ride> latestRides = new ArrayList<Ride>();
 
-        if(allRides != null) {
+        if (allRides != null && currentUser != null) {
             String rideName;
             String[] rideNumber;
-        for (int i = 0; i < (currentUser.getRides().size()); i++) {
+            for (int i = 0; i < (currentUser.getRides().size()); i++) {
 
-            rideName = currentUser.getRides().get(i);
-            rideNumber = rideName.split("ride");
-            for(int j = 0; j < allRides.size(); j++){
-                if(allRides.get(j).getId() == Integer.parseInt(rideNumber[1])) {
-                    latestRides.add(allRides.get(j));
+                rideName = currentUser.getRides().get(i);
+                rideNumber = rideName.split("ride");
+                for (int j = 0; j < allRides.size(); j++) {
+                    if (allRides.get(j).getId() == Integer.parseInt(rideNumber[1])) {
+                        latestRides.add(allRides.get(j));
+                    }
                 }
             }
+        } else {
+            whatnew = (TextView) findViewById(R.id.whatnew);
+            whatnew.setText("Please reload the activity to display your rides");
         }
-
-    }else{
-        whatnew = (TextView) findViewById(R.id.whatnew);
-        whatnew.setText("Please reload the page to your rides");
-    }
-        Collections.sort(latestRides, new Comparator<Ride>(){
+        Collections.sort(latestRides, new Comparator<Ride>() {
             public int compare(Ride s1, Ride s2) {
                 Integer price1 = s1.getId();
                 Integer price2 = s2.getId();
@@ -67,13 +68,10 @@ public class WhatsUpActivity extends NavDrawActivity {
 
         listView.setAdapter(rideAdapter);
 
-
-
-
         Bundle bundle = this.getIntent().getExtras();
 
-        if(bundle != null) {
-            if (this.getIntent().getExtras().get("done") != null) { // Register in the databse here because the google map activity is a fragement
+        if (bundle != null) {
+            if (this.getIntent().getExtras().get("done") != null) { // Register in the database here because the google map activity is a fragment
                 bundle = null;
                 getIntent().removeExtra("done");
                 int actualID = allRides.size() + 1;
@@ -94,17 +92,5 @@ public class WhatsUpActivity extends NavDrawActivity {
                 myRef.child("rides").child("ride" + actualID).setValue(newRide);
             }
         }
-
-
-
-
-
-
     }
-
-        public int compare(Ride o1, Ride o2) {
-                Integer price1 = o1.getId();
-                Integer price2 = o2.getId();
-                return price1.compareTo(price2);
-        }
 }

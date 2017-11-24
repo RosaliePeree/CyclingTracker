@@ -44,7 +44,7 @@ public class ProfileActivity extends NavDrawActivity {
         date_text = (TextView) findViewById(R.id.date_lastride);
         time_text = (TextView) findViewById(R.id.time_lastride);
 
-        if(currentUser.getRides() != null) {
+        if (currentUser.getRides() != null) {
             int index = currentUser.getRides().size();
             String toParse = currentUser.getRides().get(index - 1);
             String[] yolo = toParse.split("ride");
@@ -52,20 +52,20 @@ public class ProfileActivity extends NavDrawActivity {
             boolean found = false;
             int counter = 1;
             Ride latest = new Ride();
-            while(!found){
-                if(allRides.get(counter).getId() == index){
+            while (!found) {
+                if (allRides.get(counter).getId() == index) {
                     found = true;
                     latest = allRides.get(counter);
                     distance_text.setText("Distance : " + String.valueOf(latest.getDistance()));
                     averagespeed_text.setText("Average Speed : " + String.valueOf(latest.getAverage_speed()));
                     date_text.setText("Date : " + latest.getDate());
                     time_text.setText("Time : " + String.valueOf(latest.getTime()));
-                }else{
+                } else {
                     counter++;
                 }
             }
 
-        }else{
+        } else {
             distance_text.setText("");
             averagespeed_text.setText("");
             date_text.setText("No record to display !");
@@ -79,10 +79,9 @@ public class ProfileActivity extends NavDrawActivity {
         //addRideUser(mAuth.getCurrentUser().getUid());
 
 
-
     }
 
-    private void addRideUser(String userID){
+    private void addRideUser(String userID) {
 
     }
 }

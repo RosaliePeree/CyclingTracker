@@ -33,7 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends NavDrawActivity implements View.OnClickListener{
+public class MainActivity extends NavDrawActivity implements View.OnClickListener {
 
     Button buttonSignIn, buttonSignUp, buttonSubmitSignIn, buttonSubmitSignOn;
     EditText emailSignIn, pswdSignIn, pswdSignUp, usernameSignUp, emailSignUp;
@@ -51,7 +51,7 @@ public class MainActivity extends NavDrawActivity implements View.OnClickListene
 
         emailSignIn = (EditText) findViewById(R.id.edit_text_username);
         pswdSignIn = (EditText) findViewById(R.id.edit_text_passwd);
-        pswdSignUp =  (EditText) findViewById(R.id.edit_text_create_passwd);
+        pswdSignUp = (EditText) findViewById(R.id.edit_text_create_passwd);
         emailSignUp = (EditText) findViewById(R.id.edit_text_create_email);
         usernameSignUp = (EditText) findViewById(R.id.edit_text_create_username);
 
@@ -61,14 +61,13 @@ public class MainActivity extends NavDrawActivity implements View.OnClickListene
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        if(user != null)
-        {
-            Intent intent = new Intent(this,WhatsUpActivity.class);
+        if (user != null) {
+            Intent intent = new Intent(this, WhatsUpActivity.class);
             startActivity(intent);
         }
     }
 
-    public void setButtonsListener(){
+    public void setButtonsListener() {
         fragmentMain = (LinearLayout) findViewById(R.id.layout_fragment_main);
         fragmentSignIn = (LinearLayout) findViewById(R.id.layout_fragment_sign_in);
         fragmentSignUp = (LinearLayout) findViewById(R.id.layout_fragment_sign_up);
@@ -80,10 +79,10 @@ public class MainActivity extends NavDrawActivity implements View.OnClickListene
         scrollView.setVisibility(View.GONE);
 
         //Find all the buttons on the layout and add listeners to them
-        buttonSignIn = (Button)findViewById(R.id.button_sign_in);
-        buttonSignUp = (Button)findViewById(R.id.button_sign_up);
-        buttonSubmitSignIn = (Button)findViewById(R.id.submit_button_sign_in);
-        buttonSubmitSignOn = (Button)findViewById(R.id.submit_button_sign_on);
+        buttonSignIn = (Button) findViewById(R.id.button_sign_in);
+        buttonSignUp = (Button) findViewById(R.id.button_sign_up);
+        buttonSubmitSignIn = (Button) findViewById(R.id.submit_button_sign_in);
+        buttonSubmitSignOn = (Button) findViewById(R.id.submit_button_sign_on);
         buttonSignIn.setOnClickListener(this);
         buttonSignUp.setOnClickListener(this);
         buttonSubmitSignIn.setOnClickListener(this);
@@ -92,7 +91,7 @@ public class MainActivity extends NavDrawActivity implements View.OnClickListene
 
     @Override
     public void onClick(View view) {
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.button_sign_in:
                 //Hide the previous buttons and display the new buttons
                 fragmentMain.setVisibility(View.GONE);
@@ -111,7 +110,7 @@ public class MainActivity extends NavDrawActivity implements View.OnClickListene
                 /* Insert database code here (Greg) */
                 if (pswdSignIn.getText().toString().isEmpty() || emailSignIn.getText().toString().isEmpty()) {
                     Toast.makeText(MainActivity.this, "Empty field(s).", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     mAuth.signInWithEmailAndPassword(emailSignIn.getText().toString(), pswdSignIn.getText().toString())
                             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -135,11 +134,11 @@ public class MainActivity extends NavDrawActivity implements View.OnClickListene
                 break;
 
             case R.id.submit_button_sign_on:
-                Toast.makeText(this,"Add the info in the database",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Add the info in the database", Toast.LENGTH_SHORT).show();
                 /* Insert database code here (Greg) */
                 if (pswdSignUp.getText().toString().isEmpty() || emailSignUp.getText().toString().isEmpty() || usernameSignUp.getText().toString().isEmpty()) {
                     Toast.makeText(MainActivity.this, "Empty field(s).", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
 
                     mAuth.createUserWithEmailAndPassword(emailSignUp.getText().toString(), pswdSignUp.getText().toString())
                             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -155,14 +154,14 @@ public class MainActivity extends NavDrawActivity implements View.OnClickListene
                                         Toast.makeText(MainActivity.this, "Creation of account successful",
                                                 Toast.LENGTH_SHORT).show();
                                         user = mAuth.getCurrentUser();
-                                        if(user != null) {
+                                        if (user != null) {
                                             Intent intent = new Intent(getBaseContext(), WhatsUpActivity.class);
                                             startActivity(intent);
                                         }
                                     } else {
                                         // If sign in fails, display a message to the user.
-                                        FirebaseAuthException e = (FirebaseAuthException )task.getException();
-                                        Toast.makeText(MainActivity.this, "Failed Registration: "+e.getMessage(), Toast.LENGTH_LONG).show();
+                                        FirebaseAuthException e = (FirebaseAuthException) task.getException();
+                                        Toast.makeText(MainActivity.this, "Failed Registration: " + e.getMessage(), Toast.LENGTH_LONG).show();
                                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
                                         Log.e("LoginActivity", "Failed Registration", e);
                                         Toast.makeText(MainActivity.this, "Creation of account failed.",
@@ -178,7 +177,7 @@ public class MainActivity extends NavDrawActivity implements View.OnClickListene
 
     /* Those two functions are used to handle the back key press event, to not have it go out of the activity */
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (Integer.parseInt(android.os.Build.VERSION.SDK) > 5
                 && keyCode == KeyEvent.KEYCODE_BACK
                 && event.getRepeatCount() == 0) {

@@ -49,7 +49,8 @@ public class NavDrawActivity extends AppCompatActivity
     protected FirebaseUser user;
     protected static User currentUser;
     protected static ArrayList<Ride> allRides;
-    public static SharedPreferences getSharedPreferences (Context ctxt) {
+
+    public static SharedPreferences getSharedPreferences(Context ctxt) {
         return ctxt.getSharedPreferences("FILE", 0);
     }
 
@@ -68,47 +69,47 @@ public class NavDrawActivity extends AppCompatActivity
         user = mAuth.getCurrentUser();
 
 
-    if(mAuth.getCurrentUser() != null) {
-        myRef.child("users/" + mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() { //Gets the info about the connected user and put it in connected USer
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                User use = dataSnapshot.getValue(User.class);
-                Log.i(use.getName(), " user");
-                currentUser = use;
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-
-        myRef.child("rides").addValueEventListener(new ValueEventListener() { //gets all of the Rides and store them in the allRides list
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //Ride ride = dataSnapshot.getValue(Ride.class);
-                //Log.i(ride.getDate(), " date");
-                allRides = new ArrayList<Ride>();
-                for(DataSnapshot dsp : dataSnapshot.getChildren()) {
-                    //allRides.add((dsp.getValue(Ride.class)));
-                    allRides.add(dsp.getValue(Ride.class));
+        if (mAuth.getCurrentUser() != null) {
+            myRef.child("users/" + mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() { //Gets the info about the connected user and put it in connected USer
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User use = dataSnapshot.getValue(User.class);
+                    //Log.i(use.getName(), " user");
+                    currentUser = use;
                 }
 
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
 
 
-    }else{
-        Toast.makeText(NavDrawActivity.this, "Please reconnect !",
-                Toast.LENGTH_LONG).show();
-    }
+            myRef.child("rides").addValueEventListener(new ValueEventListener() { //gets all of the Rides and store them in the allRides list
+
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    //Ride ride = dataSnapshot.getValue(Ride.class);
+                    //Log.i(ride.getDate(), " date");
+                    allRides = new ArrayList<Ride>();
+                    for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                        //allRides.add((dsp.getValue(Ride.class)));
+                        allRides.add(dsp.getValue(Ride.class));
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
+        } else {
+            Toast.makeText(NavDrawActivity.this, "Please reconnect !",
+                    Toast.LENGTH_LONG).show();
+        }
 
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);

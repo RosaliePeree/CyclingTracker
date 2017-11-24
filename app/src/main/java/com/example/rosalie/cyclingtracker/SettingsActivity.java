@@ -17,7 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SettingsActivity extends NavDrawActivity{
+public class SettingsActivity extends NavDrawActivity {
 
     public static final String MY_PREFS_NAME = "MyPrefsFile";
 
@@ -39,13 +39,14 @@ public class SettingsActivity extends NavDrawActivity{
     public static class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
         private SharedPreferences sharedPreferences;
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
             addPreferencesFromResource(R.xml.user_settings);
 
-            sharedPreferences =  getActivity().getBaseContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
+            sharedPreferences = getActivity().getBaseContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("username", currentUser.getName()); //This is just an example, you could also put boolean, long, int or floats
             editor.putString("email", currentUser.getMail());

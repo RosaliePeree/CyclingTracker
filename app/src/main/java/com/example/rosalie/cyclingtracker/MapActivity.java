@@ -99,7 +99,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     private static ArrayList<Ride> allRides;
 
 
-
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(INTERVAL);
@@ -122,24 +121,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
         builder.setAlwaysShow(true);
 
-        /*if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            mMap.setMyLocationEnabled(true);
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-        }*/
-
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
             return;
         }
-
-        //  LatLng currentLatLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
-        // mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 17));
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, this);
         this.updateSpeed(null);
@@ -162,15 +149,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                                        @Override
                                        public void onClick(View view) {
                                            if (buttonState == 3) {
-
-
                                                stopped = true;
                                                //startPoint = points.get(0);
                                                //endPoint = points.get(points.size() - 1);
                                                activityLength = startTime;
                                                returnedHighestSpeed = highestSpeed;
                                                returnedLowestSpeed = lowestSpeed;
-
 
                                                for (int i = 0; i < points.size() - 1; i++) {
                                                    LatLng temp = points.get(i);
@@ -205,18 +189,15 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                                                String timeToParse = currentTime.getText().toString();
                                                double timeToSend = 0;
                                                String[] tokens = timeToParse.split(":");
-                                               timeToParse = tokens[0] + " " + tokens[1] + " " + tokens[2];
-                                               timeToSend = ((Double.parseDouble(tokens[0])) + (Double.parseDouble("0." + tokens[1])));
+                                               timeToParse = tokens[1] + " " + tokens[2] + " " + tokens[3];
+                                               timeToSend = ((Double.parseDouble(tokens[1])) + (Double.parseDouble("0." + tokens[2])));
                                                Log.i("time", timeToParse);
-                                               intent.putExtra("time", timeToSend );
+                                               intent.putExtra("time", timeToSend);
                                                startActivityForResult(intent, 1);
-
                                            }
-
                                        }
 
                                    }
-
         );
 
         btnStart.setOnClickListener(new View.OnClickListener() // button for starting and pausing the exercise
@@ -258,8 +239,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
             }
 
 
-
-
         });
     }
 
@@ -277,20 +256,15 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
             if (lowestSpeed > nCurrentSpeed) lowestSpeed = nCurrentSpeed;
             else if (highestSpeed < nCurrentSpeed) highestSpeed = nCurrentSpeed;
         }
-        if (nCurrentSpeed > setMinimalspeed && nCurrentSpeed < setMaximumspeed)
-        {
+        if (nCurrentSpeed > setMinimalspeed && nCurrentSpeed < setMaximumspeed) {
             speedCondition = true;
             tooFast = false;
             tooSlow = false;
-        }
-        else if (nCurrentSpeed < setMinimalspeed)
-        {
+        } else if (nCurrentSpeed < setMinimalspeed) {
             speedCondition = false;
             tooFast = false;
             tooSlow = true;
-        }
-        else if (nCurrentSpeed > setMaximumspeed)
-        {
+        } else if (nCurrentSpeed > setMaximumspeed) {
             speedCondition = false;
             tooFast = true;
             tooSlow = false;
@@ -304,17 +278,13 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         String strUnits = "kilometers/hour";
 
         TextView txtCurrentSpeed = (TextView) this.findViewById(R.id.txtCurrentSpeed);
-        if (tooSlow == true)
-        {
+        if (tooSlow == true) {
             String tooSlow = "You are moving too slow!";
             txtCurrentSpeed.setText(tooSlow);
-        }
-        else if(tooFast == true )
-        {
+        } else if (tooFast == true) {
             String tooFst = "You are moving too fast!";
             txtCurrentSpeed.setText(tooFst);
-        }
-        else txtCurrentSpeed.setText(strCurrentSpeed + " " + strUnits);
+        } else txtCurrentSpeed.setText("Speed: " + strCurrentSpeed + " " + strUnits);
     }
 
     @Override
@@ -329,7 +299,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
             if (mStarted) {
                 long milis = (System.currentTimeMillis() - startTime);
                 long seconds = milis / 1000;
-                currentTime.setText(String.format("%03d:%02d:%02d", seconds / 60, seconds % 60, milis % 100));
+                currentTime.setText("Time: " + String.format("%03d:%02d:%02d", seconds / 60, seconds % 60, milis % 100));
                 mHandler.postDelayed(mRunnable, 10L);
             }
         }
