@@ -13,8 +13,12 @@ import android.widget.TextView;
 
 import com.example.rosalie.cyclingtracker.Database.Ride;
 import com.example.rosalie.cyclingtracker.Database.RideAdapter;
+import com.google.maps.android.MarkerManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.concurrent.TimeUnit;
 
 public class WhatsUpActivity extends NavDrawActivity {
 
@@ -34,17 +38,33 @@ public class WhatsUpActivity extends NavDrawActivity {
         listView = (ListView) findViewById(R.id.list_of_rides);
         ArrayList<Ride> latestRides = new ArrayList<Ride>();
 
-    if(allRides != null) {
-        for (int i = (allRides.size() - 5); i < (allRides.size() - 1); i++) {
-            latestRides.add(allRides.get(i));
+        if(allRides != null) {
+            String rideName;
+            String[] rideNumber;
+        for (int i = 0; i < (currentUser.getRides().size()); i++) {
+
+            rideName = currentUser.getRides().get(i);
+            rideNumber = rideName.split("ride");
+            for(int j = 0; j < allRides.size(); j++){
+                if(allRides.get(j).getId() == Integer.parseInt(rideNumber[1])) {
+                    latestRides.add(allRides.get(j));
+                }
+            }
         }
+
     }else{
         whatnew = (TextView) findViewById(R.id.whatnew);
-        whatnew.setText("Please reload the page to see the latest rides made by the community");
+        whatnew.setText("Please reload the page to your rides");
     }
-
-
+        Collections.sort(latestRides, new Comparator<Ride>(){
+            public int compare(Ride s1, Ride s2) {
+                Integer price1 = s1.getId();
+                Integer price2 = s2.getId();
+                return price1.compareTo(price2);
+            }
+        });
         RideAdapter rideAdapter = new RideAdapter(this, latestRides);
+
         listView.setAdapter(rideAdapter);
 
 
@@ -81,4 +101,10 @@ public class WhatsUpActivity extends NavDrawActivity {
 
 
     }
+
+        public int compare(Ride o1, Ride o2) {
+                Integer price1 = o1.getId();
+                Integer price2 = o2.getId();
+                return price1.compareTo(price2);
+        }
 }

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
@@ -66,6 +67,7 @@ public class NavDrawActivity extends AppCompatActivity
         myRef = database.getReference();
         user = mAuth.getCurrentUser();
 
+
     if(mAuth.getCurrentUser() != null) {
         myRef.child("users/" + mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() { //Gets the info about the connected user and put it in connected USer
             @Override
@@ -80,6 +82,8 @@ public class NavDrawActivity extends AppCompatActivity
 
             }
         });
+
+
 
         myRef.child("rides").addValueEventListener(new ValueEventListener() { //gets all of the Rides and store them in the allRides list
 

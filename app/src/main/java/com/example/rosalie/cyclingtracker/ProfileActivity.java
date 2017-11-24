@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.rosalie.cyclingtracker.Database.Ride;
 import com.example.rosalie.cyclingtracker.Database.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -47,12 +48,22 @@ public class ProfileActivity extends NavDrawActivity {
             int index = currentUser.getRides().size();
             String toParse = currentUser.getRides().get(index - 1);
             String[] yolo = toParse.split("ride");
-            index = Integer.parseInt(yolo[1]) - 1;
-
-            distance_text.setText("Distance : " + String.valueOf(allRides.get(index).getDistance()));
-            averagespeed_text.setText("Average Speed : " + String.valueOf(allRides.get(index).getAverage_speed()));
-            date_text.setText("Date : " + allRides.get(index).getDate());
-            time_text.setText("Time : " + String.valueOf(allRides.get(index).getTime()));
+            index = Integer.parseInt(yolo[1]);
+            boolean found = false;
+            int counter = 1;
+            Ride latest = new Ride();
+            while(!found){
+                if(allRides.get(counter).getId() == index){
+                    found = true;
+                    latest = allRides.get(counter);
+                    distance_text.setText("Distance : " + String.valueOf(latest.getDistance()));
+                    averagespeed_text.setText("Average Speed : " + String.valueOf(latest.getAverage_speed()));
+                    date_text.setText("Date : " + latest.getDate());
+                    time_text.setText("Time : " + String.valueOf(latest.getTime()));
+                }else{
+                    counter++;
+                }
+            }
 
         }else{
             distance_text.setText("");
